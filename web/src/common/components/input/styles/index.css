@@ -1,0 +1,18 @@
+.input {
+  height: 2.5rem;
+  width: 240px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  transition: border 400ms;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 0.9rem;
+}
+.input:hover {
+  border: 1px solid gray;
+}
+.input:focus {
+  outline: none;
+  border: 1px solid skyblue;
+  box-shadow: 0 0 4px skyblue;
+}

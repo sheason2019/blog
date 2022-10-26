@@ -1,0 +1,30 @@
+.button {
+  padding: 8px 0;
+  border: 0;
+  border-radius: 4px;
+  transition: 400ms;
+  font-size: 1rem;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button.button-primary {
+  background-color: rgb(25, 118, 210);
+  color: white;
+  outline: none;
+}
+.button.button-primary:hover {
+  background-color: rgb(21, 101, 192);
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button.button-error {
+  background: white;
+  color: red;
+  outline: 1px solid red;
+}
+.button.button.button-error:hover {
+  background-color: rgba(255, 0, 0, 0.15);
+}

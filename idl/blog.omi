@@ -1,0 +1,12 @@
+struct User {
+  int UserId;
+
+  string Username;
+  string Password;
+}
+
+service UserService {
+  string Login(User user);
+  User Regist(User user);
+  User GetUserByToken(string token);
+}
