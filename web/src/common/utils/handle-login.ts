@@ -1,8 +1,11 @@
 import { getUserClient } from "../../api-client";
 import { handleGetUserByToken } from "./handle-get-user-by-token";
+import { handleAddErrorNotifier } from "./use-notifier";
 import { setUserToken } from "./user-token";
 
 export const handleLogin = async (username: string, password: string) => {
+  setUserToken("");
+
   const client = getUserClient();
 
   const [err, res] = await client.Login({
@@ -14,6 +17,7 @@ export const handleLogin = async (username: string, password: string) => {
   });
 
   if (err) {
+    handleAddErrorNotifier(err.message, "登录失败");
     throw err;
   }
 

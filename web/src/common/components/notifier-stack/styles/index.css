@@ -1,0 +1,45 @@
+.notifier-item {
+  z-index: 1000;
+  width: 28rem;
+  min-height: 5.75rem;
+  padding: 8px 0;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
+  border-radius: 8px;
+  background: white;
+  transition: 400ms;
+  display: flex;
+  position: absolute;
+  right: 15px;
+}
+
+.variant-bar {
+  margin: 0 8px;
+  width: 4px;
+  align-self: stretch;
+  border-radius: 2px;
+}
+.variant-bar-default {
+  background-color: gray;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 8px;
+}
+.variant-bar-success {
+  background-color: green;
+  box-shadow: rgba(0, 255, 0, 0.35) 0px 0px 8px;
+}
+.variant-bar-error {
+  background-color: rgb(225, 20, 20);
+  box-shadow: rgba(255, 0, 0, 0.25) 0px 0px 8px;
+}
+.notifier-content {
+  flex: 1;
+  overflow: hidden;
+}
+.notifier-item.hide {
+  transform: translateY(calc(100% + 30px));
+}
+.notifier-item.show {
+  transform: translateY(0);
+}
+.notifier-item.close {
+  transform: translateX(calc(100% + 30px));
+}
