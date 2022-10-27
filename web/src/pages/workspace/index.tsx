@@ -1,11 +1,10 @@
-import { Component } from "solid-js";
 import AppBar from "../../common/components/app-bar";
 
-const WorkSpacePage: Component = () => {
+const WorkSpacePage = () => {
   return (
     <>
       <AppBar />
-      <div>WORKSPACE PAGE</div>
+      <div class="flex"></div>
     </>
   );
 };

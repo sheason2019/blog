@@ -30,9 +30,22 @@ export const handleAddErrorNotifier = (content: string, header?: string) => {
   });
 };
 
-export const handleSetNotifierHeight = (index: number, height: number) => {
-  setNotifier((prev) => {
-    prev[index].height = height;
-    return [...prev];
+export const handleAddSuccessNotifier = (content: string, header?: string) => {
+  handleAddNotifier({
+    variant: "success",
+    content,
+    header,
+    id: count++,
   });
+};
+
+export const handleSetNotifierHeight = (index: number, height: number) => {
+  setNotifier((prev) =>
+    prev.map((item) => {
+      if (item.id === index) {
+        item.height = height;
+      }
+      return item;
+    })
+  );
 };
