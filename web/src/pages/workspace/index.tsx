@@ -1,3 +1,4 @@
+import { useParams } from "@solidjs/router";
 import { Match, Switch } from "solid-js";
 import AppBar from "../../common/components/app-bar";
 import { limit } from "../../common/signals/limit";
@@ -7,6 +8,8 @@ import Menu from "./components/menu";
 import Sections from "./modules/sections";
 
 const WorkSpacePage = () => {
+  const params = useParams();
+
   return (
     <Switch>
       <Match when={limit().Read}>
@@ -14,7 +17,11 @@ const WorkSpacePage = () => {
         <div class="flex flex-1">
           <Menu />
           <Content>
-            <Sections />
+            <Switch>
+              <Match when={params.module === "sections"}>
+                <Sections />
+              </Match>
+            </Switch>
           </Content>
         </div>
       </Match>

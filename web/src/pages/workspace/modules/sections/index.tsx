@@ -4,7 +4,7 @@ import PaginationComp from "../../components/pagination";
 import Table, { TableColumn } from "../../components/table";
 import SectionController from "./components/controller";
 import CreateModal from "./components/create-modal";
-import { pagination, sections } from "./signals/sections";
+import { fetchSections, pagination, sections } from "./signals/sections";
 
 const columns: TableColumn[] = [
   { title: "ID", dataIndex: "SectionId" },
@@ -13,6 +13,8 @@ const columns: TableColumn[] = [
 ];
 
 const Sections: Component = () => {
+  fetchSections(pagination().Page, pagination().PageSize);
+
   return (
     <>
       <Header class="mb-4">版块管理</Header>

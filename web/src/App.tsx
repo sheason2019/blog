@@ -1,6 +1,6 @@
 import { lazy } from "solid-js";
 import type { Component } from "solid-js";
-import { Route, Routes } from "@solidjs/router";
+import { Navigate, Route, Routes } from "@solidjs/router";
 import NotifierStack from "./common/components/notifier-stack";
 import { fetchLimit } from "./common/signals/limit";
 
@@ -16,7 +16,11 @@ const App: Component = () => {
       <Routes>
         <Route path="/" component={WelcomePage} />
         <Route path="/home" component={HomePage} />
-        <Route path="/workspace" component={WorkSpacePage} />
+        <Route
+          path="/workspace"
+          element={<Navigate href="/workspace/sections" />}
+        />
+        <Route path="/workspace/:module" component={WorkSpacePage} />
       </Routes>
       <NotifierStack />
     </div>

@@ -1,8 +1,15 @@
+import { useNavigate } from "@solidjs/router";
 import { Component } from "solid-js";
 import Header from "../../../../common/components/header";
 import { resetLimit } from "../../../../common/signals/limit";
 import { setToken } from "../../../../common/utils/token";
 import MenuItem from "../menu-item";
+
+enum WorkspaceRoute {
+  Sections = "/workspace/sections",
+  Albums = "/workspace/albums",
+  Posts = "/workspace/posts",
+}
 
 const Menu: Component = () => {
   const useOtherToken = () => {
@@ -10,13 +17,21 @@ const Menu: Component = () => {
     resetLimit();
   };
 
+  const navigate = useNavigate();
+
   return (
     <div class="w-72 border-r border-gray-300 flex flex-col">
       <Header class="p-2">工作台</Header>
       <div class="h-2" />
-      <MenuItem>版块管理</MenuItem>
-      <MenuItem>合集管理</MenuItem>
-      <MenuItem>文章管理</MenuItem>
+      <MenuItem onClick={() => navigate(WorkspaceRoute.Sections)}>
+        版块管理
+      </MenuItem>
+      <MenuItem onClick={() => navigate(WorkspaceRoute.Albums)}>
+        合集管理
+      </MenuItem>
+      <MenuItem onClick={() => navigate(WorkspaceRoute.Posts)}>
+        文章管理
+      </MenuItem>
       <div class="flex-1" />
       <MenuItem onClick={useOtherToken}>
         <div class="text-red-500 flex justify-center items-center">
