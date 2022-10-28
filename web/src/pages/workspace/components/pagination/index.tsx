@@ -23,7 +23,7 @@ const PaginationComp: Component<Props> = (props) => {
       return null;
     }
 
-    const start = Math.max((Page - 1) * PageSize, 0);
+    const start = Math.max((Page - 1) * PageSize + 1, 0);
     const end = Math.min(Page * PageSize, Count);
 
     return (

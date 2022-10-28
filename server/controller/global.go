@@ -12,4 +12,5 @@ var service blog.Blog = &blogImpl{}
 func BindBlogController(r *gin.Engine) {
 	attachGetLimit(r)
 	attachGetSections(r)
+	attachPostSections(r)
 }

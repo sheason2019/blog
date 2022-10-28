@@ -3,6 +3,7 @@ import Header from "../../../../common/components/header";
 import PaginationComp from "../../components/pagination";
 import Table, { TableColumn } from "../../components/table";
 import SectionController from "./components/controller";
+import CreateModal from "./components/create-modal";
 import { pagination, sections } from "./signals/sections";
 
 const columns: TableColumn[] = [
@@ -20,6 +21,7 @@ const Sections: Component = () => {
       <div class="mt-4">
         <PaginationComp pagination={pagination()} />
       </div>
+      <CreateModal />
     </>
   );
 };

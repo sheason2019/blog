@@ -3,6 +3,7 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sheason2019/blog/dao"
+	"github.com/sheason2019/blog/middleware"
 	"github.com/sheason2019/blog/omi/blog"
 	"github.com/sheason2019/blog/utils"
 )
@@ -30,7 +31,7 @@ func (blogImpl) GetSections(ctx *gin.Context, page, pageSize int) blog.GetSectio
 }
 
 func attachGetSections(r *gin.Engine) {
-	r.GET(blog.BlogDefinition.GET_SECTIONS_PATH, func(ctx *gin.Context) {
+	r.GET(blog.BlogDefinition.GET_SECTIONS_PATH, middleware.CheckReadLimit, func(ctx *gin.Context) {
 		props := blog.GetSectionsRequest{}
 		ctx.BindQuery(&props)
 
