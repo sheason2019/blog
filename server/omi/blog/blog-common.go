@@ -1,20 +1,36 @@
 /**
 * 本文件由Omi.js自动生成，谨慎改动！
-* 生成时间：2022年10月26日 23:47:33.
+* 生成时间：2022年10月28日 22:58:51.
  */
 package blog
 
-type User struct {
-	UserId   *int
-	Username *string
-	Password *string
+type LimitResponse struct {
+	Read  *bool
+	Write *bool
 }
-type LoginRequest struct {
-	User User `json:"user"`
+type Section struct {
+	SectionId   *int
+	SectionName *string
 }
-type RegistRequest struct {
-	User User `json:"user"`
+type Pagination struct {
+	Page     *int
+	PageSize *int
+	Count    *int
 }
-type GetUserByTokenRequest struct {
+type GetSectionsResponse struct {
+	Pagination *Pagination
+	Sections   *[]Section
+}
+type GetLimitRequest struct {
 	Token string `form:"token"`
+}
+type GetSectionsRequest struct {
+	Page     int `form:"Page"`
+	PageSize int `form:"PageSize"`
+}
+type PostSectionsRequest struct {
+	Section Section `json:"section"`
+}
+type DeleteSectionsRequest struct {
+	SectionId int `form:"SectionId"`
 }

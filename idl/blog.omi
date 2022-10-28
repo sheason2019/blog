@@ -1,0 +1,31 @@
+struct LimitResponse {
+  boolean Read;
+  boolean Write;
+}
+
+struct Section {
+  int SectionId;
+  string SectionName;
+}
+
+struct Pagination {
+  int Page;
+  int PageSize;
+  int Count;
+}
+
+struct GetSectionsResponse {
+  Pagination Pagination;
+  repeated Section Sections;
+}
+
+service Blog {
+  // 输入秘钥以获取用户权限
+  LimitResponse GetLimit(string token);
+  // 创建、获取和删除版块
+  GetSectionsResponse GetSections(int Page, int PageSize);
+  Section PostSections(Section section);
+  int DeleteSections(int SectionId);
+  // 创建、获取和删除文章
+
+}

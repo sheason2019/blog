@@ -1,19 +1,8 @@
 import { useNavigate } from "@solidjs/router";
 import { Component } from "solid-js";
-import { user } from "../../signals/user";
 
 const AppBar: Component = () => {
   const navigate = useNavigate();
-
-  const handleOnClickAvatar = () => {
-    if (!user()) {
-      // 未登录情况下跳转到Login页面
-      navigate("/login");
-    } else {
-      // 登录情况下跳转到Space页面
-      navigate("/space");
-    }
-  };
 
   const handleToHome = () => {
     navigate("/home");

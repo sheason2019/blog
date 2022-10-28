@@ -6,6 +6,8 @@ func AutoMigrate() {
 	conn := db.GetConn()
 
 	conn.AutoMigrate(
-		&User{},
+		&Section{},
+		&Album{},
+		&Post{},
 	)
 }

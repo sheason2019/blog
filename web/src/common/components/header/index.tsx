@@ -1,7 +1,7 @@
-import { Component, ParentProps } from "solid-js";
+import { Component, JSX } from "solid-js";
 
-const Header: Component<ParentProps> = (props) => {
-  return <div class="text-2xl">{props.children}</div>;
+const Header: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {
+  return <div {...props} class={`text-2xl ${props.class}`} />;
 };
 
 export default Header;
