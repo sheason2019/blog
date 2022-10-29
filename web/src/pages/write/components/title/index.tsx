@@ -1,8 +1,9 @@
 import Quill from "quill";
-import { Component, createEffect, JSX } from "solid-js";
+import { Component, createEffect } from "solid-js";
 import { handleFocusContent } from "../editor";
 
 let titleQuill: Quill;
+export let titleHeight: number = 0;
 
 export const handleFocusTitle = () => {
   titleQuill.focus();
@@ -30,6 +31,7 @@ const Title: Component = () => {
     });
 
     titleQuill = quill;
+    titleHeight = rootRef.clientHeight;
   });
 
   return <div ref={rootRef} class="text-4xl font-bold title" />;

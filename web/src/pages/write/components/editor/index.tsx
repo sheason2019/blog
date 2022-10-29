@@ -1,9 +1,10 @@
-import { Component, createEffect, JSX } from "solid-js";
+import { Component, createEffect, createSignal, JSX } from "solid-js";
 import Quill from "quill";
 
 import "./index.css";
-import Toolbar from "../toolbar";
-import Title, { handleFocusTitle } from "../title";
+import Toolbar, { handleSetTop, setToolbar } from "../toolbar";
+import Title, { handleFocusTitle, titleHeight } from "../title";
+import Container from "../../../../common/components/container";
 
 let contentQuill: Quill;
 
@@ -14,11 +15,21 @@ export const handleFocusContent = () => {
 const Editor: Component = () => {
   let rootRef: HTMLDivElement | undefined;
 
+  const [contentEmpty, setContentEmpty] = createSignal(true);
+  const [useBackSpace, setUseBackSpace] = createSignal(false);
+
+  // 创建Quill实例
   createEffect(() => {
     if (!rootRef) return;
 
     const quill = new Quill(rootRef, {
       placeholder: "请在此处输入内容……",
+    });
+
+    quill.on("text-change", () => {
+      const text = quill.getText();
+
+      setTimeout(() => setContentEmpty(text.length <= 1), 0);
     });
 
     contentQuill = quill;
@@ -27,22 +38,58 @@ const Editor: Component = () => {
   const handleOnKeydown: JSX.DOMAttributes<HTMLDivElement>["onkeydown"] = (
     e
   ) => {
-    const text = contentQuill.getText();
-    if (text.length <= 1 && e.key === "Backspace") {
-      handleFocusTitle();
+    if (e.key === "Backspace") {
+      setUseBackSpace(true);
+    } else {
+      setUseBackSpace(false);
     }
   };
 
+  const handleOnMouseEnter = (e: MouseEvent) => {
+    const dom = e.target! as HTMLParagraphElement;
+    if (dom.tagName !== "P") return;
+
+    const top = dom.offsetTop + titleHeight;
+
+    handleSetTop(top);
+  };
+
+  const handleOnMouseLeave = (e: MouseEvent) => {
+    const dom = e.target! as HTMLParagraphElement;
+    if (dom.tagName !== "P") return;
+
+    setToolbar((prev) => ({ ...prev, show: false }));
+  };
+
+  createEffect(() => {
+    rootRef!.addEventListener("mouseenter", handleOnMouseEnter, true);
+    rootRef!.addEventListener("mouseleave", handleOnMouseLeave, true);
+  });
+
+  createEffect(() => {
+    const empty = contentEmpty();
+    const backspace = useBackSpace();
+    if (empty && backspace) {
+      handleFocusTitle();
+    } else {
+      setUseBackSpace(false);
+    }
+  });
+
   return (
-    <div
-      class="mt-2 flex-1 mx-auto container"
-      style={{ "max-width": "1024px" }}
-    >
-      <div class="relative">
-        <Title />
-        <div onKeyDown={handleOnKeydown} ref={rootRef} />
+    <div class="relative flex-1 flex flex-col">
+      <Container class="flex-1 flex flex-col">
+        <div>
+          <Title />
+        </div>
+        <div
+          class="flex-1 cursor-text"
+          onClick={() => contentQuill.focus()}
+          onKeyDown={handleOnKeydown}
+          ref={rootRef}
+        />
         <Toolbar />
-      </div>
+      </Container>
     </div>
   );
 };
