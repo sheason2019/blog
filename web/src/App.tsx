@@ -7,6 +7,7 @@ import { fetchLimit } from "./common/signals/limit";
 const WelcomePage = lazy(() => import("./pages/welcome"));
 const HomePage = lazy(() => import("./pages/home"));
 const WorkSpacePage = lazy(() => import("./pages/workspace"));
+const WritePage = lazy(() => import("./pages/write"));
 
 const App: Component = () => {
   fetchLimit();
@@ -21,6 +22,7 @@ const App: Component = () => {
           element={<Navigate href="/workspace/sections" />}
         />
         <Route path="/workspace/:module" component={WorkSpacePage} />
+        <Route path="/write" component={WritePage} />
       </Routes>
       <NotifierStack />
     </div>
