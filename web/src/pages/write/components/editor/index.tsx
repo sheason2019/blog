@@ -1,96 +1,78 @@
-import { Component, createEffect, createSignal, JSX } from "solid-js";
-import Quill from "quill";
+import { Component, createEffect, createSignal } from "solid-js";
 
+import { $getRoot, createEditor, LexicalEditor } from "lexical";
+import { HeadingNode, QuoteNode, registerRichText } from "@lexical/rich-text";
+import { ListItemNode, ListNode } from "@lexical/list";
+import { CodeHighlightNode, CodeNode } from "@lexical/code";
+import { TableCellNode, TableNode, TableRowNode } from "@lexical/table";
+import { AutoLinkNode, LinkNode } from "@lexical/link";
+import {
+  TRANSFORMERS,
+  registerMarkdownShortcuts,
+  $convertToMarkdownString,
+} from "@lexical/markdown";
+
+import exampleTheme from "./themes/example";
 import "./index.css";
-import Toolbar, { handleSetTop, setToolbar } from "../toolbar";
-import Title, { handleFocusTitle, titleHeight } from "../title";
-import Container from "../../../../common/components/container";
+import { handleFocusTitle } from "../title";
 
-let contentQuill: Quill;
+let editorRef: HTMLDivElement | undefined;
 
 export const handleFocusContent = () => {
-  contentQuill.focus();
+  editorRef?.focus();
 };
 
 const Editor: Component = () => {
-  let rootRef: HTMLDivElement | undefined;
+  const [editor, setEditor] = createSignal<LexicalEditor>();
 
-  const [contentEmpty, setContentEmpty] = createSignal(true);
-  const [useBackSpace, setUseBackSpace] = createSignal(false);
+  const [empty, setEmpty] = createSignal(true);
 
-  // 创建Quill实例
   createEffect(() => {
-    if (!rootRef) return;
+    if (!editorRef) return;
 
-    const quill = new Quill(rootRef, {
-      placeholder: "请在此处输入内容……",
+    const config = {
+      namespace: "ContentEditor",
+      theme: exampleTheme,
+      nodes: [
+        HeadingNode,
+        ListNode,
+        ListItemNode,
+        QuoteNode,
+        CodeNode,
+        CodeHighlightNode,
+        TableNode,
+        TableCellNode,
+        TableRowNode,
+        AutoLinkNode,
+        LinkNode,
+      ],
+    };
+
+    const editor = createEditor(config);
+    editor.setRootElement(editorRef);
+    setEditor(editor);
+
+    registerRichText(editor);
+
+    registerMarkdownShortcuts(editor, TRANSFORMERS);
+
+    editor.registerUpdateListener(({ editorState }) => {
+      editorState.read(() => {
+        const markdownStr = $convertToMarkdownString(TRANSFORMERS);
+        setEmpty(markdownStr.length === 0);
+      });
     });
-
-    quill.on("text-change", () => {
-      const text = quill.getText();
-
-      setTimeout(() => setContentEmpty(text.length <= 1), 0);
-    });
-
-    contentQuill = quill;
-  });
-
-  const handleOnKeydown: JSX.DOMAttributes<HTMLDivElement>["onkeydown"] = (
-    e
-  ) => {
-    if (e.key === "Backspace") {
-      setUseBackSpace(true);
-    } else {
-      setUseBackSpace(false);
-    }
-  };
-
-  const handleOnMouseEnter = (e: MouseEvent) => {
-    const dom = e.target! as HTMLParagraphElement;
-    if (dom.tagName !== "P") return;
-
-    const top = dom.offsetTop + titleHeight;
-
-    handleSetTop(top);
-  };
-
-  const handleOnMouseLeave = (e: MouseEvent) => {
-    const dom = e.target! as HTMLParagraphElement;
-    if (dom.tagName !== "P") return;
-
-    setToolbar((prev) => ({ ...prev, show: false }));
-  };
-
-  createEffect(() => {
-    rootRef!.addEventListener("mouseenter", handleOnMouseEnter, true);
-    rootRef!.addEventListener("mouseleave", handleOnMouseLeave, true);
-  });
-
-  createEffect(() => {
-    const empty = contentEmpty();
-    const backspace = useBackSpace();
-    if (empty && backspace) {
-      handleFocusTitle();
-    } else {
-      setUseBackSpace(false);
-    }
   });
 
   return (
-    <div class="relative flex-1 flex flex-col">
-      <Container class="flex-1 flex flex-col">
-        <div>
-          <Title />
-        </div>
-        <div
-          class="flex-1 cursor-text"
-          onClick={() => contentQuill.focus()}
-          onKeyDown={handleOnKeydown}
-          ref={rootRef}
-        />
-        <Toolbar />
-      </Container>
-    </div>
+    <div
+      class="editor editable flex-1"
+      onkeydown={(e) => empty() && handleFocusTitle()}
+      attr-empty={empty()}
+      attr-placeholder="在此输入内容"
+      contentEditable
+      ref={editorRef}
+    />
   );
 };
 
