@@ -8,6 +8,7 @@ const WelcomePage = lazy(() => import("./pages/welcome"));
 const HomePage = lazy(() => import("./pages/home"));
 const WorkSpacePage = lazy(() => import("./pages/workspace"));
 const WritePage = lazy(() => import("./pages/write"));
+const PostPage = lazy(() => import("./pages/post"));
 
 const App: Component = () => {
   fetchLimit();
@@ -23,6 +24,7 @@ const App: Component = () => {
         />
         <Route path="/workspace/:module" component={WorkSpacePage} />
         <Route path="/write" component={WritePage} />
+        <Route path="/post/:id" component={PostPage} />
       </Routes>
       <NotifierStack />
     </div>

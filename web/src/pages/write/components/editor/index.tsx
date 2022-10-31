@@ -1,6 +1,6 @@
 import { Component, createEffect, createSignal } from "solid-js";
 
-import { $getRoot, createEditor, LexicalEditor } from "lexical";
+import { createEditor } from "lexical";
 import { HeadingNode, QuoteNode, registerRichText } from "@lexical/rich-text";
 import { ListItemNode, ListNode } from "@lexical/list";
 import { CodeHighlightNode, CodeNode } from "@lexical/code";
@@ -15,51 +15,34 @@ import {
 import exampleTheme from "./themes/example";
 import "./index.css";
 import { handleFocusTitle } from "../title";
+import RichTextEditor from "../../../../common/components/editor";
 
-let editorRef: HTMLDivElement | undefined;
+let editorRef: HTMLDivElement;
 
 export const handleFocusContent = () => {
   editorRef?.focus();
+
+  const range = window.getSelection();
+  range?.selectAllChildren(editorRef);
+  range?.collapseToStart();
 };
 
-const Editor: Component = () => {
-  const [editor, setEditor] = createSignal<LexicalEditor>();
+export const [content, setContent] = createSignal("");
 
+const Editor: Component = () => {
   const [empty, setEmpty] = createSignal(true);
 
   createEffect(() => {
     if (!editorRef) return;
 
-    const config = {
-      namespace: "ContentEditor",
-      theme: exampleTheme,
-      nodes: [
-        HeadingNode,
-        ListNode,
-        ListItemNode,
-        QuoteNode,
-        CodeNode,
-        CodeHighlightNode,
-        TableNode,
-        TableCellNode,
-        TableRowNode,
-        AutoLinkNode,
-        LinkNode,
-      ],
-    };
-
-    const editor = createEditor(config);
-    editor.setRootElement(editorRef);
-    setEditor(editor);
-
-    registerRichText(editor);
-
-    registerMarkdownShortcuts(editor, TRANSFORMERS);
+    const richEditor = new RichTextEditor(editorRef);
+    const editor = richEditor.editor;
 
     editor.registerUpdateListener(({ editorState }) => {
+      setContent(JSON.stringify(editorState.toJSON()));
       editorState.read(() => {
         const markdownStr = $convertToMarkdownString(TRANSFORMERS);
-        setEmpty(markdownStr.length === 0);
+        setTimeout(() => setEmpty(markdownStr.length === 0), 0);
       });
     });
   });
@@ -67,7 +50,7 @@ const Editor: Component = () => {
   return (
     <div
       class="editor editable flex-1"
-      onkeydown={(e) => empty() && handleFocusTitle()}
+      onkeydown={(e) => e.key === "Backspace" && empty() && handleFocusTitle()}
       attr-empty={empty()}
       attr-placeholder="在此输入内容"
       contentEditable

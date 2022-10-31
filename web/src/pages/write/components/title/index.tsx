@@ -5,11 +5,16 @@ let titleRef: HTMLDivElement;
 
 export const handleFocusTitle = () => {
   titleRef.focus();
+
+  const range = window.getSelection();
+  range?.selectAllChildren(titleRef);
+  range?.collapseToEnd();
 };
+
+export const [title, setTitle] = createSignal("");
 
 const Title: Component = () => {
   const contentEditable: any = "plaintext-only";
-  const [title, setTitle] = createSignal("");
 
   const handleBeforeInput: JSX.DOMAttributes<HTMLDivElement>["onbeforeinput"] =
     (e) => {

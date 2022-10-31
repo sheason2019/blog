@@ -10,7 +10,7 @@ const AppBar: Component = () => {
 
   return (
     <>
-      <div class="h-16 pr-6 shadow-lg bg-blue-400 flex items-center fixed top-0 left-0 right-0">
+      <div class="h-16 pr-6 shadow-lg z-50 bg-blue-400 flex items-center fixed top-0 left-0 right-0">
         <div
           class="text-white font-bold text-xl cursor-pointer px-6"
           onClick={handleToHome}

@@ -8,6 +8,7 @@ func AutoMigrate() {
 	conn.AutoMigrate(
 		&Section{},
 		&Album{},
-		&Post{},
+		&Article{},
+		&AlbumItem{},
 	)
 }

@@ -35,4 +35,10 @@
 }
 .title {
   outline: none;
+  position: relative;
+}
+
+/** 行距 */
+.editor-paragraph {
+  margin-bottom: 0.25rem;
 }

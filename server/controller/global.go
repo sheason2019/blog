@@ -13,4 +13,6 @@ func BindBlogController(r *gin.Engine) {
 	attachGetLimit(r)
 	attachGetSections(r)
 	attachPostSections(r)
+	attachPostArticle(r)
+	attachGetArticleById(r)
 }

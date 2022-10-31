@@ -19,6 +19,14 @@ struct GetSectionsResponse {
   repeated Section Sections;
 }
 
+struct Article {
+  int Id;
+  string Title;
+  string Content;
+  string Owner;
+  int CreateTime;
+}
+
 service Blog {
   // 输入秘钥以获取用户权限
   LimitResponse GetLimit(string token);
@@ -27,5 +35,6 @@ service Blog {
   Section PostSections(Section section);
   int DeleteSections(int SectionId);
   // 创建、获取和删除文章
-
+  void PostArticle(Article article);
+  Article GetArticleById(int articleId);
 }
