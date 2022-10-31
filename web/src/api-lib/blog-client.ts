@@ -1,6 +1,6 @@
 /**
  * 本文件由Omi.js自动生成，谨慎改动！
- * 生成时间：2022年10月31日 17:30:30.
+ * 生成时间：2022年10月31日 19:41:33.
  */
 
 import { OmiClientBase } from "@omi-stack/omi-client";
@@ -22,6 +22,10 @@ export interface Pagination {
 export interface GetSectionsResponse {
   Pagination: Pagination;
   Sections: Section[];
+}
+export interface GetArticlesResponse {
+  Pagination: Pagination;
+  Articles: Article[];
 }
 export interface Article {
   Id: number;
@@ -72,7 +76,7 @@ export class BlogClient extends OmiClientBase {
   ) {
     const url = "Blog.Article";
     const method = "Post";
-    return this.request<void>(url, method, props, option);
+    return this.request<number>(url, method, props, option);
   }
   GetArticleById(
     props: { articleId: number },
@@ -81,5 +85,29 @@ export class BlogClient extends OmiClientBase {
     const url = "Blog.ArticleById";
     const method = "Get";
     return this.request<Article>(url, method, props, option);
+  }
+  GetArticles(
+    props: { Page: number; PageSize: number },
+    option?: Omit<AxiosRequestConfig, "params">
+  ) {
+    const url = "Blog.Articles";
+    const method = "Get";
+    return this.request<GetArticlesResponse>(url, method, props, option);
+  }
+  PutArticle(
+    props: { article: Article },
+    option?: Omit<AxiosRequestConfig, "params">
+  ) {
+    const url = "Blog.Article";
+    const method = "Put";
+    return this.request<void>(url, method, props, option);
+  }
+  DeleteArticle(
+    props: { articleId: number },
+    option?: Omit<AxiosRequestConfig, "params">
+  ) {
+    const url = "Blog.Article";
+    const method = "Delete";
+    return this.request<void>(url, method, props, option);
   }
 }

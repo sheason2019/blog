@@ -1,6 +1,6 @@
 /**
 * 本文件由Omi.js自动生成，谨慎改动！
-* 生成时间：2022年10月31日 17:8:3.
+* 生成时间：2022年10月31日 19:47:7.
  */
 package blog
 
@@ -20,6 +20,10 @@ type Pagination struct {
 type GetSectionsResponse struct {
 	Pagination *Pagination
 	Sections   *[]Section
+}
+type GetArticlesResponse struct {
+	Pagination *Pagination
+	Articles   *[]Article
 }
 type Article struct {
 	Id         *int
@@ -45,5 +49,15 @@ type PostArticleRequest struct {
 	Article Article `json:"article"`
 }
 type GetArticleByIdRequest struct {
+	ArticleId int `form:"articleId"`
+}
+type GetArticlesRequest struct {
+	Page     int `form:"Page"`
+	PageSize int `form:"PageSize"`
+}
+type PutArticleRequest struct {
+	Article Article `json:"article"`
+}
+type DeleteArticleRequest struct {
 	ArticleId int `form:"articleId"`
 }

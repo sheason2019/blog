@@ -25,6 +25,6 @@ func attachGetArticleById(r *gin.Engine) {
 		props := blog.GetArticleByIdRequest{}
 		ctx.BindQuery(&props)
 
-		ctx.JSON(200, service.GetArticleById(ctx, props.ArticleId))
+		ctx.JSON(200, controller.GetArticleById(ctx, props.ArticleId))
 	})
 }

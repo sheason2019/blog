@@ -1,6 +1,6 @@
 /**
 * 本文件由Omi.js自动生成，谨慎改动！
-* 生成时间：2022年10月31日 17:8:3.
+* 生成时间：2022年10月31日 19:47:7.
  */
 package blog
 
@@ -16,8 +16,11 @@ type Blog interface {
 	PostSections(ctx *gin.Context, section Section) Section
 	DeleteSections(ctx *gin.Context, SectionId int) int
 	// 创建、获取和删除文章
-	PostArticle(ctx *gin.Context, article Article)
+	PostArticle(ctx *gin.Context, article Article) int
 	GetArticleById(ctx *gin.Context, articleId int) Article
+	GetArticles(ctx *gin.Context, Page int, PageSize int) GetArticlesResponse
+	PutArticle(ctx *gin.Context, article Article)
+	DeleteArticle(ctx *gin.Context, articleId int)
 }
 type TypeBlogDefinition struct {
 	GET_LIMIT_PATH         string
@@ -26,6 +29,9 @@ type TypeBlogDefinition struct {
 	DELETE_SECTIONS_PATH   string
 	POST_ARTICLE_PATH      string
 	GET_ARTICLE_BY_ID_PATH string
+	GET_ARTICLES_PATH      string
+	PUT_ARTICLE_PATH       string
+	DELETE_ARTICLE_PATH    string
 }
 
 var BlogDefinition = &TypeBlogDefinition{
@@ -35,4 +41,7 @@ var BlogDefinition = &TypeBlogDefinition{
 	DELETE_SECTIONS_PATH:   "/Blog.Sections",
 	POST_ARTICLE_PATH:      "/Blog.Article",
 	GET_ARTICLE_BY_ID_PATH: "/Blog.ArticleById",
+	GET_ARTICLES_PATH:      "/Blog.Articles",
+	PUT_ARTICLE_PATH:       "/Blog.Article",
+	DELETE_ARTICLE_PATH:    "/Blog.Article",
 }

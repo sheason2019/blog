@@ -8,7 +8,7 @@ const Background: Component<ParentProps<Props>> = (props) => {
   return (
     <div
       onClick={props.onClick}
-      class="fixed inset-0 bg-black bg-opacity-20 flex justify-center items-center"
+      class="fixed inset-0 z-50 bg-black bg-opacity-20 flex justify-center items-center"
       children={props.children}
     />
   );

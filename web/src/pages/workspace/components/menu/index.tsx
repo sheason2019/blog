@@ -8,7 +8,7 @@ import MenuItem from "../menu-item";
 enum WorkspaceRoute {
   Sections = "/workspace/sections",
   Albums = "/workspace/albums",
-  Posts = "/workspace/posts",
+  Article = "/workspace/article",
 }
 
 const Menu: Component = () => {
@@ -29,7 +29,7 @@ const Menu: Component = () => {
       <MenuItem onClick={() => navigate(WorkspaceRoute.Albums)}>
         合集管理
       </MenuItem>
-      <MenuItem onClick={() => navigate(WorkspaceRoute.Posts)}>
+      <MenuItem onClick={() => navigate(WorkspaceRoute.Article)}>
         文章管理
       </MenuItem>
       <div class="flex-1" />

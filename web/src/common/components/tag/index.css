@@ -1,0 +1,16 @@
+.tag-button {
+  @apply inline-block align-middle hover:bg-blue-300 p-1 mx-0.5 cursor-pointer rounded-full;
+}
+
+.tag {
+  @apply bg-blue-200 text-blue-600 inline-block pl-2 h-7 rounded-sm align-middle;
+}
+
+.tag-content {
+  @apply inline-block align-middle;
+
+  max-width: 8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

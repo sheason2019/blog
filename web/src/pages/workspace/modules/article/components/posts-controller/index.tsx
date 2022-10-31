@@ -6,7 +6,7 @@ const PostsController: Component = () => {
   const navigate = useNavigate();
 
   return (
-    <div class="mt-2">
+    <div class="my-2">
       <Button onClick={() => navigate("/write")}>新建文章</Button>
     </div>
   );

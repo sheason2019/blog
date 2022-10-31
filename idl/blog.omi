@@ -19,6 +19,11 @@ struct GetSectionsResponse {
   repeated Section Sections;
 }
 
+struct GetArticlesResponse {
+  Pagination Pagination;
+  repeated Article Articles;
+}
+
 struct Article {
   int Id;
   string Title;
@@ -32,9 +37,13 @@ service Blog {
   LimitResponse GetLimit(string token);
   // 创建、获取和删除版块
   GetSectionsResponse GetSections(int Page, int PageSize);
+  repeated Section GetSectionsByName(string name);
   Section PostSections(Section section);
   int DeleteSections(int SectionId);
   // 创建、获取和删除文章
-  void PostArticle(Article article);
+  int PostArticle(Article article);
   Article GetArticleById(int articleId);
+  GetArticlesResponse GetArticles(int Page, int PageSize);
+  void PutArticle(Article article);
+  void DeleteArticle(int articleId);
 }

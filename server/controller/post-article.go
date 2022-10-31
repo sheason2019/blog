@@ -2,20 +2,20 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sheason2019/blog/dao"
 	"github.com/sheason2019/blog/db"
 	"github.com/sheason2019/blog/middleware"
 	"github.com/sheason2019/blog/omi/blog"
+	"github.com/sheason2019/blog/service"
 )
 
-func (blogImpl) PostArticle(ctx *gin.Context, article blog.Article) {
+func (blogImpl) PostArticle(ctx *gin.Context, article blog.Article) int {
 	conn := db.GetConn()
-	daoArticle := dao.Article{}
-	daoArticle.Content = *article.Content
-	daoArticle.Title = *article.Title
-	daoArticle.Owner = "Sheason"
+
+	daoArticle := service.CreateArticleByIDL(article)
 
 	conn.Create(&daoArticle)
+
+	return int(daoArticle.ID)
 }
 
 func attachPostArticle(r *gin.Engine) {
@@ -23,7 +23,6 @@ func attachPostArticle(r *gin.Engine) {
 		props := blog.PostArticleRequest{}
 		ctx.BindJSON(&props)
 
-		service.PostArticle(ctx, props.Article)
-		ctx.String(200, "OK")
+		ctx.JSON(200, controller.PostArticle(ctx, props.Article))
 	})
 }

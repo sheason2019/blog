@@ -5,7 +5,7 @@ import { limit } from "../../common/signals/limit";
 import Authority from "./components/authority";
 import Content from "./components/content";
 import Menu from "./components/menu";
-import Posts from "./modules/post";
+import Article from "./modules/article";
 import Sections from "./modules/sections";
 
 const WorkSpacePage = () => {
@@ -22,8 +22,8 @@ const WorkSpacePage = () => {
               <Match when={params.module === "sections"}>
                 <Sections />
               </Match>
-              <Match when={params.module === "posts"}>
-                <Posts />
+              <Match when={params.module === "article"}>
+                <Article />
               </Match>
             </Switch>
           </Content>

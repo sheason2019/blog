@@ -27,6 +27,6 @@ func attachGetLimit(r *gin.Engine) {
 	r.GET(blog.BlogDefinition.GET_LIMIT_PATH, func(ctx *gin.Context) {
 		props := &blog.GetLimitRequest{}
 		ctx.BindQuery(props)
-		ctx.JSON(200, service.GetLimit(ctx, props.Token))
+		ctx.JSON(200, controller.GetLimit(ctx, props.Token))
 	})
 }

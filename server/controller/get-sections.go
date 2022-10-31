@@ -35,6 +35,6 @@ func attachGetSections(r *gin.Engine) {
 		props := blog.GetSectionsRequest{}
 		ctx.BindQuery(&props)
 
-		ctx.JSON(200, service.GetSections(ctx, props.Page, props.PageSize))
+		ctx.JSON(200, controller.GetSections(ctx, props.Page, props.PageSize))
 	})
 }

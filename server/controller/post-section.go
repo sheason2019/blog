@@ -34,6 +34,6 @@ func attachPostSections(r *gin.Engine) {
 		props := blog.PostSectionsRequest{}
 		ctx.BindJSON(&props)
 
-		ctx.JSON(200, service.PostSections(ctx, props.Section))
+		ctx.JSON(200, controller.PostSections(ctx, props.Section))
 	})
 }

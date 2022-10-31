@@ -2,6 +2,8 @@
 @import "./common/components/button/styles/index.css";
 @import "./common/components/link/styles/index.css";
 @import "./common/components/notifier-stack/styles/index.css";
+@import "./common/components/tag/index.css";
+@import "./common/components/auto-complete/index.css";
 
 /** tailwind css */
 @tailwind base;

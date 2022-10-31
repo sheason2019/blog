@@ -1,8 +1,9 @@
-import { Component, createMemo, For } from "solid-js";
+import { Component, createMemo, For, JSX, Match, Switch } from "solid-js";
 
 export interface TableColumn {
   title?: string;
   dataIndex?: string;
+  render?: (row: any, col: any) => JSX.Element;
 }
 
 interface Props {
@@ -37,13 +38,7 @@ const Table: Component<Props> = (props) => {
       <For each={props.data}>
         {(row) => (
           <tr class="w-full flex py-3">
-            <For each={props.columns}>
-              {(col) => (
-                <td class="flex-1 text-left px-2">
-                  {col.dataIndex && row[col.dataIndex]}
-                </td>
-              )}
-            </For>
+            <For each={props.columns}>{(col) => createTableItem(col, row)}</For>
           </tr>
         )}
       </For>
@@ -63,6 +58,19 @@ const Table: Component<Props> = (props) => {
         <tbody>{contentRender()}</tbody>
       </table>
     </div>
+  );
+};
+
+const createTableItem = (col: TableColumn, row: Record<string, any>) => {
+  const data = col.dataIndex ? row[col.dataIndex] : undefined;
+
+  return (
+    <td class="flex-1 text-left px-2">
+      <Switch>
+        <Match when={!col.render}>{data}</Match>
+        <Match when={col.render}>{col.render!(row, data)}</Match>
+      </Switch>
+    </td>
   );
 };
 

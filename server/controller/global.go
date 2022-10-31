@@ -7,7 +7,7 @@ import (
 
 type blogImpl struct{}
 
-var service blog.Blog = &blogImpl{}
+var controller blog.Blog = &blogImpl{}
 
 func BindBlogController(r *gin.Engine) {
 	attachGetLimit(r)
@@ -15,4 +15,7 @@ func BindBlogController(r *gin.Engine) {
 	attachPostSections(r)
 	attachPostArticle(r)
 	attachGetArticleById(r)
+	attachPutArticle(r)
+	attachGetArticles(r)
+	attachDeleteArticle(r)
 }
