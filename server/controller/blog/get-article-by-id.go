@@ -1,4 +1,4 @@
-package controller
+package blog_controller
 
 import (
 	"github.com/gin-gonic/gin"

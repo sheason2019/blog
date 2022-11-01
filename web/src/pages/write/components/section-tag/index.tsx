@@ -15,7 +15,7 @@ const SectionTag: Component<Props> = (props) => {
     return undefined;
   });
 
-  return <Tag onClose={handleClose}>{props.section.SectionName}</Tag>;
+  return <Tag onClose={handleClose()}>{props.section.SectionName}</Tag>;
 };
 
 export default SectionTag;

@@ -1,6 +1,6 @@
 /**
 * 本文件由Omi.js自动生成，谨慎改动！
-* 生成时间：2022年11月1日 15:43:46.
+* 生成时间：2022年11月1日 23:55:51.
  */
 package blog
 
@@ -9,8 +9,9 @@ type LimitResponse struct {
 	Write *bool
 }
 type Section struct {
-	SectionId   *int
-	SectionName *string
+	SectionId    *int
+	SectionName  *string
+	ArticleCount *int
 }
 type Pagination struct {
 	Page     *int
@@ -64,4 +65,7 @@ type PutArticleRequest struct {
 }
 type DeleteArticleRequest struct {
 	ArticleId int `form:"articleId"`
+}
+type GetNewestArticleRequest struct {
+	Length int `form:"length"`
 }

@@ -13,7 +13,7 @@ const Statistics: Component = () => {
         <div class="w-4" />
         <StatisticsItem title="创建合集" value="0" />
         <div class="w-4" />
-        <StatisticsItem title="点击总量" value="0" />
+        <StatisticsItem title="上次更新" value="0" />
       </div>
     </div>
   );

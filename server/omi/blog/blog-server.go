@@ -1,6 +1,6 @@
 /**
 * 本文件由Omi.js自动生成，谨慎改动！
-* 生成时间：2022年11月1日 15:43:46.
+* 生成时间：2022年11月1日 23:55:51.
  */
 package blog
 
@@ -47,4 +47,16 @@ var BlogDefinition = &TypeBlogDefinition{
 	GET_ARTICLES_PATH:         "/Blog.Articles",
 	PUT_ARTICLE_PATH:          "/Blog.Article",
 	DELETE_ARTICLE_PATH:       "/Blog.Article",
+}
+
+type HomePage interface {
+	// 最新文章
+	GetNewestArticle(ctx *gin.Context, length int) []Article
+}
+type TypeHomePageDefinition struct {
+	GET_NEWEST_ARTICLE_PATH string
+}
+
+var HomePageDefinition = &TypeHomePageDefinition{
+	GET_NEWEST_ARTICLE_PATH: "/HomePage.NewestArticle",
 }

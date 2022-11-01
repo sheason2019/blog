@@ -6,6 +6,8 @@ struct LimitResponse {
 struct Section {
   int SectionId;
   string SectionName;
+
+  optional int ArticleCount;
 }
 
 struct Pagination {
@@ -48,4 +50,10 @@ service Blog {
   GetArticlesResponse GetArticles(int Page, int PageSize);
   void PutArticle(Article article);
   void DeleteArticle(int articleId);
+}
+
+service HomePage {
+  // 最新文章
+  repeated Article GetNewestArticle(int length);
+
 }

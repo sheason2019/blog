@@ -1,8 +1,11 @@
-import { useNavigate } from "@solidjs/router";
-import { Component } from "solid-js";
+import { useLocation, useNavigate } from "@solidjs/router";
+import { Component, Show } from "solid-js";
 
 const AppBar: Component = () => {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  console.log(location.pathname);
 
   const handleToHome = () => {
     navigate("/home");
@@ -17,6 +20,15 @@ const AppBar: Component = () => {
         >
           Sheason's Blog
         </div>
+        <Show when={location.pathname === "/home"}>
+          <div class="flex-1" />
+          <div
+            onClick={() => navigate("/workspace")}
+            class="text-white font-bold border border-white px-2 py-1 rounded-md border-opacity-50 hover:bg-black hover:bg-opacity-25 cursor-pointer"
+          >
+            工作台
+          </div>
+        </Show>
       </div>
       <div class="h-16" />
     </>
