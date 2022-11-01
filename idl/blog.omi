@@ -30,6 +30,8 @@ struct Article {
   string Content;
   string Owner;
   int CreateTime;
+
+  repeated Section Sections;
 }
 
 service Blog {

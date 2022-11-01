@@ -3,7 +3,6 @@ import { Component } from "solid-js";
 import Title from "../title";
 import Container from "../../../../common/components/container";
 import Editor from "../editor";
-import SubmitModal from "../submit-modal";
 
 const Main: Component = () => {
   return (
@@ -14,7 +13,6 @@ const Main: Component = () => {
           <Editor />
         </Container>
       </div>
-      <SubmitModal />
     </>
   );
 };

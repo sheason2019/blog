@@ -11,6 +11,8 @@ type Article struct {
 	Content string
 
 	Owner string
+
+	Sections []Section `gorm:"many2many:article_section"`
 }
 
 func (model Article) ToIDL() blog.Article {
@@ -19,10 +21,16 @@ func (model Article) ToIDL() blog.Article {
 	id := int(model.ID)
 	createTime := int(model.CreatedAt.Unix())
 
+	sections := make([]blog.Section, len(model.Sections))
+	for i, v := range model.Sections {
+		sections[i] = v.ToIDL()
+	}
+
 	article.Id = &id
 	article.Content = &model.Content
 	article.Title = &model.Title
 	article.Owner = &model.Owner
+	article.Sections = &sections
 	article.CreateTime = &createTime
 
 	return article

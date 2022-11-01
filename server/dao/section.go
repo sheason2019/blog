@@ -9,7 +9,7 @@ type Section struct {
 	gorm.Model
 	Name string
 
-	Posts []Article `gorm:"many2many:posts_section"`
+	Posts []Article `gorm:"many2many:article_section"`
 }
 
 func (model Section) ToIDL() blog.Section {

@@ -16,7 +16,7 @@ const Tag: Component<ParentProps<Props>> = (props) => {
   return (
     <div class={rootClass()}>
       <span class="tag-content">{props.children}</span>
-      <Show when={!props.onClose}>
+      <Show when={props.onClose}>
         <span onClick={props.onClose} class="tag-button">
           <CloseSvg size={14} />
         </span>

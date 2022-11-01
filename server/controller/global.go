@@ -18,4 +18,5 @@ func BindBlogController(r *gin.Engine) {
 	attachPutArticle(r)
 	attachGetArticles(r)
 	attachDeleteArticle(r)
+	attachGetSectionsByName(r)
 }

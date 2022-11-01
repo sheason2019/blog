@@ -10,5 +10,12 @@ func CreateArticleByIDL(article blog.Article) dao.Article {
 	daoArticle.Content = *article.Content
 	daoArticle.Title = *article.Title
 	daoArticle.Owner = "Sheason"
+
+	daoSections := make([]dao.Section, len(*article.Sections))
+	for i, v := range *article.Sections {
+		daoSections[i] = dao.Section{Name: *v.SectionName}
+		daoSections[i].ID = uint(*v.SectionId)
+	}
+	daoArticle.Sections = daoSections
 	return daoArticle
 }

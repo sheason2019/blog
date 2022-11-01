@@ -12,7 +12,7 @@ func (blogImpl) GetArticles(ctx *gin.Context, page, pageSize int) blog.GetArticl
 	daoArticles, count := utils.QueryWithPagination[dao.Article](
 		page,
 		pageSize,
-		nil,
+		&[]string{"Sections"},
 	)
 
 	articles := make([]blog.Article, len(daoArticles))

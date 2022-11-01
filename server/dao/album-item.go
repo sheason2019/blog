@@ -7,9 +7,9 @@ type AlbumItem struct {
 
 	Index uint64
 
-	Album   Album `gorm:"foreignKey:albumId"`
-	AlbumId uint64
+	Album   Album `gorm:"foreignKey:AlbumId"`
+	AlbumId uint
 
 	Article   Article `gorm:"foreignKey:ArticleId"`
-	ArticleId uint64
+	ArticleId uint
 }

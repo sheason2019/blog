@@ -12,7 +12,7 @@ func (blogImpl) GetArticleById(ctx *gin.Context, articleId int) blog.Article {
 	daoArticle := dao.Article{}
 	daoArticle.ID = uint(articleId)
 
-	err := conn.Where(&daoArticle).First(&daoArticle).Error
+	err := conn.Model(&daoArticle).Preload("Sections").Where(&daoArticle).First(&daoArticle).Error
 	if err != nil {
 		panic(err)
 	}

@@ -1,6 +1,6 @@
 /**
  * 本文件由Omi.js自动生成，谨慎改动！
- * 生成时间：2022年10月31日 19:41:33.
+ * 生成时间：2022年11月1日 15:51:1.
  */
 
 import { OmiClientBase } from "@omi-stack/omi-client";
@@ -33,6 +33,7 @@ export interface Article {
   Content: string;
   Owner: string;
   CreateTime: number;
+  Sections: Section[];
 }
 export class BlogClient extends OmiClientBase {
   // 输入秘钥以获取用户权限
@@ -52,6 +53,14 @@ export class BlogClient extends OmiClientBase {
     const url = "Blog.Sections";
     const method = "Get";
     return this.request<GetSectionsResponse>(url, method, props, option);
+  }
+  GetSectionsByName(
+    props: { name: string },
+    option?: Omit<AxiosRequestConfig, "params">
+  ) {
+    const url = "Blog.SectionsByName";
+    const method = "Get";
+    return this.request<Section[]>(url, method, props, option);
   }
   PostSections(
     props: { section: Section },

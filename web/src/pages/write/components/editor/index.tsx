@@ -1,19 +1,7 @@
 import { Component, createEffect, createSignal } from "solid-js";
 
-import { createEditor } from "lexical";
-import { HeadingNode, QuoteNode, registerRichText } from "@lexical/rich-text";
-import { ListItemNode, ListNode } from "@lexical/list";
-import { CodeHighlightNode, CodeNode } from "@lexical/code";
-import { TableCellNode, TableNode, TableRowNode } from "@lexical/table";
-import { AutoLinkNode, LinkNode } from "@lexical/link";
-import {
-  TRANSFORMERS,
-  registerMarkdownShortcuts,
-  $convertToMarkdownString,
-} from "@lexical/markdown";
+import { TRANSFORMERS, $convertToMarkdownString } from "@lexical/markdown";
 
-import exampleTheme from "./themes/example";
-import "./index.css";
 import { handleFocusTitle } from "../title";
 import RichTextEditor from "../../../../common/components/editor";
 

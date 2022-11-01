@@ -1,6 +1,6 @@
 /**
 * 本文件由Omi.js自动生成，谨慎改动！
-* 生成时间：2022年10月31日 19:47:7.
+* 生成时间：2022年11月1日 15:43:46.
  */
 package blog
 
@@ -31,6 +31,7 @@ type Article struct {
 	Content    *string
 	Owner      *string
 	CreateTime *int
+	Sections   *[]Section
 }
 type GetLimitRequest struct {
 	Token string `form:"token"`
@@ -38,6 +39,9 @@ type GetLimitRequest struct {
 type GetSectionsRequest struct {
 	Page     int `form:"Page"`
 	PageSize int `form:"PageSize"`
+}
+type GetSectionsByNameRequest struct {
+	Name string `form:"name"`
 }
 type PostSectionsRequest struct {
 	Section Section `json:"section"`

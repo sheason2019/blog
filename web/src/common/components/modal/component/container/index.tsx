@@ -8,7 +8,11 @@ enum ModalSize {
 
 const Container: Component<ParentProps> = (props) => {
   return (
-    <div class="bg-white shadow-md rounded-md" style={{ width: ModalSize.sm }}>
+    <div
+      onClick={(e) => e.stopPropagation()}
+      class="bg-white shadow-md rounded-md"
+      style={{ width: ModalSize.sm }}
+    >
       {props.children}
     </div>
   );

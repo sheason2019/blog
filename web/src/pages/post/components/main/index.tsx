@@ -4,6 +4,7 @@ import Title from "../title";
 import Container from "../../../../common/components/container";
 import Article from "../article";
 import Info from "../info";
+import Tags from "../tags";
 
 const Main: Component = () => {
   return (
@@ -12,6 +13,7 @@ const Main: Component = () => {
         <Title />
         <Info />
         <Article />
+        <Tags />
       </Container>
     </div>
   );

@@ -8,7 +8,7 @@ import {
 } from "solid-js";
 import Input from "../input";
 
-interface Option {
+export interface Option {
   label: string;
   value: any;
 }
@@ -40,6 +40,9 @@ const AutoComplete: Component<Props> = (props) => {
     e
   ) => {
     const currentValue = e.currentTarget.value;
+    if (props.onInputChange) {
+      props.onInputChange(currentValue);
+    }
   };
 
   // 添加一个点击他处监听器，用来处理应当关闭AutoComplete候选栏的行为

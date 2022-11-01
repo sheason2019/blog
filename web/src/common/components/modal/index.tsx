@@ -18,7 +18,7 @@ const Modal: Component<Props> = (props) => {
     <Show when={props.show}>
       <Background onClick={props.onClose}>
         <Container>
-          <ModalHeader>{props.header}</ModalHeader>
+          <ModalHeader onClose={props.onClose}>{props.header}</ModalHeader>
           <ModalContent>{props.content}</ModalContent>
           <ModalActions>{props.actions}</ModalActions>
         </Container>
