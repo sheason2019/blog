@@ -51,9 +51,3 @@ service Blog {
   void PutArticle(Article article);
   void DeleteArticle(int articleId);
 }
-
-service HomePage {
-  // 最新文章
-  repeated Article GetNewestArticle(int length);
-
-}

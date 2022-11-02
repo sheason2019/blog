@@ -1,6 +1,6 @@
 /**
 * 本文件由Omi.js自动生成，谨慎改动！
-* 生成时间：2022年11月1日 23:55:51.
+* 生成时间：2022年11月2日 15:19:36.
  */
 package blog
 
@@ -65,7 +65,4 @@ type PutArticleRequest struct {
 }
 type DeleteArticleRequest struct {
 	ArticleId int `form:"articleId"`
-}
-type GetNewestArticleRequest struct {
-	Length int `form:"length"`
 }

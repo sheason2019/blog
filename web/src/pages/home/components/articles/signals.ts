@@ -8,7 +8,12 @@ export const [articles, setArticles] = createSignal<Article[]>();
 export const handleFetchArticles = async () => {
   const client = getHomepageClient();
 
-  const [err, res] = await client.GetNewestArticle({ length: 9 });
+  const [err, res] = await client.GetArticles({
+    length: 9,
+    offset: 0,
+    GetNew: true,
+    SectionsId: [],
+  });
   if (err) {
     handleAddErrorNotifier(err.message, "获取首页文章信息失败");
     throw err;

@@ -16,8 +16,10 @@ func (blogImpl) GetArticles(ctx *gin.Context, page, pageSize int) blog.GetArticl
 	)
 
 	articles := make([]blog.Article, len(daoArticles))
+	emptyStr := ""
 	for i, v := range daoArticles {
 		articles[i] = v.ToIDL()
+		articles[i].Content = &emptyStr
 	}
 
 	return blog.GetArticlesResponse{

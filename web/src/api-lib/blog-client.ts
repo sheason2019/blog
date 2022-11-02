@@ -1,6 +1,6 @@
 /**
  * 本文件由Omi.js自动生成，谨慎改动！
- * 生成时间：2022年11月2日 0:0:49.
+ * 生成时间：2022年11月2日 18:57:34.
  */
 
 import { OmiClientBase } from "@omi-stack/omi-client";
@@ -119,16 +119,5 @@ export class BlogClient extends OmiClientBase {
     const url = "Blog.Article";
     const method = "Delete";
     return this.request<void>(url, method, props, option);
-  }
-}
-export class HomePageClient extends OmiClientBase {
-  // 最新文章
-  GetNewestArticle(
-    props: { length: number },
-    option?: Omit<AxiosRequestConfig, "params">
-  ) {
-    const url = "HomePage.NewestArticle";
-    const method = "Get";
-    return this.request<Article[]>(url, method, props, option);
   }
 }

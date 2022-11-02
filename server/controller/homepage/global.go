@@ -2,13 +2,13 @@ package homepage_controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sheason2019/blog/omi/blog"
+	"github.com/sheason2019/blog/omi/homepage"
 )
 
 type homepageImpl struct{}
 
-var controller blog.HomePage = homepageImpl{}
+var controller homepage.HomePage = homepageImpl{}
 
 func BindHomepageController(r *gin.Engine) {
-	attachGetNewestArticle(r)
+	attachGetArticles(r)
 }
