@@ -1,5 +1,12 @@
 import _ from "lodash";
-import { Component, createEffect, createSignal, For } from "solid-js";
+import {
+  Component,
+  createEffect,
+  createSignal,
+  For,
+  Match,
+  Switch,
+} from "solid-js";
 import { getBlogClient } from "../../../../api-client";
 import { Section } from "../../../../api-lib/blog-client";
 import AutoComplete, {
@@ -11,13 +18,17 @@ import Modal from "../../../../common/components/modal";
 import { handleAddErrorNotifier } from "../../../../common/utils/use-notifier";
 import SectionTag from "../../../write/components/section-tag";
 import {
-  selectedSections,
-  setSelectedSections,
-} from "../../../write/components/submit-modal/signals";
+  searchGetNew,
+  searchSections,
+  setSearchGetNew,
+  setSearchSections,
+} from "../../signals";
 
 const [sections, setSections] = createSignal<Section[]>([]);
 const [options, setOptions] = createSignal<Option[]>([]);
-export const [show, setShow] = createSignal(true);
+const [getNew, setGetNew] = createSignal(true);
+
+export const [show, setShow] = createSignal(false);
 
 const SettingModal: Component = () => {
   return (
@@ -25,6 +36,7 @@ const SettingModal: Component = () => {
       header="文章筛选设置"
       content={<ModalContent />}
       actions={<ModalActions />}
+      onClose={() => setShow(false)}
       show={show()}
     />
   );
@@ -36,11 +48,13 @@ const ModalContent: Component = () => {
   createEffect(() => {
     if (show()) {
       sectionSet.clear();
-      selectedSections().forEach((section) => {
+      searchSections().forEach((section) => {
         sectionSet.add(section.SectionId);
       });
 
-      setSections(selectedSections());
+      setSections(searchSections());
+
+      setGetNew(searchGetNew());
     }
   });
 
@@ -88,7 +102,12 @@ const ModalContent: Component = () => {
     <div>
       <div class="flex items-center">
         <div class="w-24">展示顺序</div>
-        <Link>最新</Link>
+        <Link onClick={() => setGetNew((prev) => !prev)}>
+          <Switch>
+            <Match when={getNew()}>最新</Match>
+            <Match when={!getNew()}>最早</Match>
+          </Switch>
+        </Link>
       </div>
       <div class="flex items-center mt-4">
         <div class="w-24">搜索版块</div>
@@ -116,12 +135,15 @@ const ModalContent: Component = () => {
 
 const ModalActions: Component = () => {
   const handleSubmit = () => {
-    setSelectedSections(sections());
+    setSearchSections(sections());
+    setSearchGetNew(getNew());
+
+    setShow(false);
   };
 
   return (
     <div>
-      <Button class="mr-3" variant="outline">
+      <Button class="mr-3" variant="outline" onClick={() => setShow(false)}>
         取消
       </Button>
       <Button onClick={handleSubmit}>确定</Button>
