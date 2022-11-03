@@ -1,6 +1,8 @@
 package homepage_controller
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sheason2019/blog/dao"
 	"github.com/sheason2019/blog/db"
@@ -21,15 +23,19 @@ func (homepageImpl) GetArticles(ctx *gin.Context, length, offset int, getNew boo
 	}
 
 	chain := conn.
+		Model(&daoArticles).
 		Preload("Sections").
 		Order(orderString).
 		Omit("content").
 		Offset(offset).
 		Limit(length)
 
+	fmt.Println(sectionsId)
 	// 根据SectionId进行筛选
 	if len(sectionsId) > 0 {
-		chain.Joins("article_section", conn.Where("section_id in ?", sectionsId))
+		chain = chain.
+			Joins("left join article_section on article_id = articles.id").
+			Where("section_id in ?", sectionsId)
 	}
 
 	err := chain.

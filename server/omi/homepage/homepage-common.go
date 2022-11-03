@@ -8,5 +8,5 @@ type GetArticlesRequest struct {
 	Length     int   `form:"length"`
 	Offset     int   `form:"offset"`
 	GetNew     bool  `form:"GetNew"`
-	SectionsId []int `form:"SectionsId"`
+	SectionsId []int `form:"SectionsId[]"`
 }

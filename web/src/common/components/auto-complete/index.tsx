@@ -1,6 +1,7 @@
 import {
   Component,
   createEffect,
+  createMemo,
   createSignal,
   For,
   JSX,
@@ -22,15 +23,25 @@ interface Props {
 const AutoComplete: Component<Props> = (props) => {
   let inputRef: HTMLInputElement | undefined;
 
-  const [show, setShow] = createSignal(false);
+  const [focus, setFocus] = createSignal(false);
+  const [inputContent, setInputContent] = createSignal("");
 
+  const show = createMemo(() => {
+    console.log(inputRef?.value);
+    if (focus() && inputContent().length > 0) {
+      return true;
+    }
+    return false;
+  });
+
+  // 清除Input中的内容
   const handleClearInput = () => {
-    inputRef!.value = "";
+    setInputContent("");
   };
 
   // 这个onClick在事件冒泡上早于下面的点击他处监听器，所以它能正常触发
   const handleOnClick = (value: any) => {
-    setShow(false);
+    setFocus(false);
     props.onSelect && props.onSelect(value);
     handleClearInput();
   };
@@ -40,6 +51,7 @@ const AutoComplete: Component<Props> = (props) => {
     e
   ) => {
     const currentValue = e.currentTarget.value;
+    setInputContent(currentValue);
     if (props.onInputChange) {
       props.onInputChange(currentValue);
     }
@@ -51,7 +63,7 @@ const AutoComplete: Component<Props> = (props) => {
       const clickEvent = (e: MouseEvent) => {
         if (e.target !== inputRef) {
           e.preventDefault();
-          setShow(false);
+          setFocus(false);
           handleClearInput();
           document.removeEventListener("click", clickEvent);
         }
@@ -65,7 +77,8 @@ const AutoComplete: Component<Props> = (props) => {
       <Input
         onInput={handleInputChange}
         ref={inputRef}
-        onFocus={() => setShow(true)}
+        value={inputContent()}
+        onFocus={() => setFocus(true)}
       />
       <div class="absolute bottom-0 left-0">
         <div class="relative">

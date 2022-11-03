@@ -3,7 +3,7 @@ import { Component, createEffect } from "solid-js";
 import Header from "../../../../common/components/header";
 import Link from "../../../../common/components/link";
 import ArticleContainer from "./components/article-container";
-import { handleFetchArticles } from "./signals";
+import { articles, handleFetchArticles } from "./signals";
 
 const Articles: Component = () => {
   createEffect(() => {
@@ -18,7 +18,7 @@ const Articles: Component = () => {
         <Header>最近更新</Header>
         <Link onClick={() => navigate("/posts")}>查看全部</Link>
       </div>
-      <ArticleContainer />
+      <ArticleContainer articles={articles()} />
     </div>
   );
 };

@@ -1,14 +1,7 @@
-import { useNavigate } from "@solidjs/router";
 import { createSignal } from "solid-js";
-import { getBlogClient } from "../../../../api-client";
 import { Section } from "../../../../api-lib/blog-client";
 import { Option } from "../../../../common/components/auto-complete";
-import {
-  handleAddErrorNotifier,
-  handleAddSuccessNotifier,
-} from "../../../../common/utils/use-notifier";
-import { content } from "../editor";
-import { title } from "../title";
+import { handleAddErrorNotifier } from "../../../../common/utils/use-notifier";
 
 // set防止写入重复的标签
 const sectionSet = new Set<number>();
@@ -24,7 +17,6 @@ export const [selectedSections, setSelectedSections] = createSignal<Section[]>(
 
 export const handleAddSection = (section: Section) => {
   if (sectionSet.has(section.SectionId)) {
-    handleAddErrorNotifier("当前已写入该标签", "添加标签时发生错误");
     return;
   }
   setSelectedSections((prev) => [...prev, section]);
