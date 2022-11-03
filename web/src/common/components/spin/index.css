@@ -1,0 +1,24 @@
+.spinner circle {
+  fill: transparent;
+  stroke: rgb(96 165 250);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 100.48;
+  transform-origin: center;
+  animation: spinner 2.5s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    stroke-dashoffset: 21.34;
+    transform: rotate(0deg);
+  }
+  50% {
+    stroke-dashoffset: 100.48;
+    transform: rotate(540deg);
+  }
+  100% {
+    stroke-dashoffset: 21.34;
+    transform: rotate(1080deg);
+  }
+}

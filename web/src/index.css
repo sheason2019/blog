@@ -4,6 +4,7 @@
 @import "./common/components/notifier-stack/styles/index.css";
 @import "./common/components/tag/index.css";
 @import "./common/components/auto-complete/index.css";
+@import "./common/components/spin/index.css";
 
 @import "./pages/write/components/editor/index.css";
 @import "./pages/post/components/article/index.css";
