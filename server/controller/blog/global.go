@@ -16,6 +16,7 @@ func BindBlogController(r *gin.Engine) {
 	attachGetSections(r)
 	attachPostSections(r)
 	attachGetSectionsByName(r)
+	attachDeleteSections(r)
 	// 文章CURD
 	attachPostArticle(r)
 	attachGetArticleById(r)

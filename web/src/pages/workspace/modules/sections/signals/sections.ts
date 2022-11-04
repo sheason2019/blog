@@ -10,19 +10,39 @@ export const [pagination, setPagination] = createSignal<Pagination>({
   Count: 0,
 });
 
-export const fetchSections = async (page: number, pageSize: number) => {
+export const [currentSection, setCurrentSection] = createSignal<
+  Section | undefined
+>();
+export const [showDeleteConfirm, setShowDeleteConfirm] = createSignal(false);
+
+// GET 版块信息
+export const fetchSections = async () => {
   const client = getBlogClient();
 
   const [err, res] = await client.GetSections({
-    Page: page,
-    PageSize: pageSize,
+    Page: pagination().Page,
+    PageSize: pagination().PageSize,
   });
 
   if (err) {
-    handleAddErrorNotifier(err.message, "获取表格发生错误");
+    handleAddErrorNotifier(err.message, "获取版块信息时发生错误");
     throw err;
   }
 
   setSections(res.Sections);
   setPagination(res.Pagination);
+};
+
+export const deleteSection = async () => {
+  const client = getBlogClient();
+  const [err, res] = await client.DeleteSections({
+    SectionId: currentSection()!.SectionId,
+  });
+  if (err) {
+    handleAddErrorNotifier(err.message, "删除版块信息时发生错误");
+    throw err;
+  }
+
+  await fetchSections();
+  setShowDeleteConfirm(false);
 };
