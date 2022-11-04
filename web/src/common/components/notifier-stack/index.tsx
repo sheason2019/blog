@@ -7,7 +7,7 @@ const NotifierStack: Component = () => {
     <div class="fixed right-0 bottom-0">
       <div class="relative p-2">
         <For each={notifier()}>
-          {(item, index) => (
+          {(item) => (
             <NotifierItem
               variant={item.variant}
               content={item.content}

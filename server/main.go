@@ -2,7 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	user_controller "github.com/sheason2019/blog/controller/user-controller"
+	blog_controller "github.com/sheason2019/blog/controller/blog"
+	homepage_controller "github.com/sheason2019/blog/controller/homepage"
 	"github.com/sheason2019/blog/dao"
 	"github.com/sheason2019/blog/db"
 	"github.com/sheason2019/blog/middleware"
@@ -18,8 +19,8 @@ func main() {
 	// 绑定异常处理中间件
 	r.Use(middleware.PanicMiddleware)
 
-	// 绑定用户Service
-	user_controller.BindUserService(r)
+	blog_controller.BindBlogController(r)
+	homepage_controller.BindHomepageController(r)
 
 	r.Run(":8080")
 }

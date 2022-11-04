@@ -1,0 +1,5 @@
+.article-item {
+  @apply border bg-white border-white hover:border-gray-300 rounded-md p-1 cursor-pointer select-none flex items-center;
+
+  transition: transform 400ms;
+}

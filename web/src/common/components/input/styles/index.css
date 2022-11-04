@@ -7,6 +7,7 @@
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   font-size: 0.9rem;
+  line-height: 0.9rem;
 }
 .input:hover {
   border: 1px solid gray;

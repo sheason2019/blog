@@ -1,12 +1,72 @@
-struct User {
-  int UserId;
-
-  string Username;
-  string Password;
+struct LimitResponse {
+  boolean Read;
+  boolean Write;
 }
 
-service UserService {
-  string Login(User user);
-  User Regist(User user);
-  User GetUserByToken(string token);
+struct Section {
+  int SectionId;
+  string SectionName;
+
+  optional int ArticleCount;
+}
+
+struct Pagination {
+  int Page;
+  int PageSize;
+  int Count;
+}
+
+struct GetSectionsResponse {
+  Pagination Pagination;
+  repeated Section Sections;
+}
+
+struct GetArticlesResponse {
+  Pagination Pagination;
+  repeated Article Articles;
+}
+
+struct Article {
+  int Id;
+  string Title;
+  string Content;
+  string Owner;
+  int CreateTime;
+
+  repeated Section Sections;
+}
+
+struct Album {
+  int Id;
+  string Name;
+  string Describe;
+
+  repeated Article Articles;
+}
+
+struct GetAlbumsResponse {
+  repeated Album Albums;
+  Pagination Pagination;
+}
+
+service Blog {
+  // 输入秘钥以获取用户权限
+  LimitResponse GetLimit(string token);
+  // 创建、获取和删除版块
+  GetSectionsResponse GetSections(int Page, int PageSize);
+  repeated Section GetSectionsByName(string name);
+  Section PostSections(Section section);
+  int DeleteSections(int SectionId);
+  // 创建、获取和删除文章
+  int PostArticle(Article article);
+  Article GetArticleById(int articleId);
+  repeated Article GetArticlesByTitle(string title);
+  GetArticlesResponse GetArticles(int Page, int PageSize);
+  void PutArticle(Article article);
+  void DeleteArticle(int articleId);
+  // 合集的CURD
+  int PostAlbum(Album album);
+  GetAlbumsResponse GetAlbums(int page, int pageSize);
+  void DeleteAlbum(int albumId);
+  void PutAlbum(Album album);
 }

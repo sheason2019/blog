@@ -1,0 +1,5 @@
+.article {
+  @apply editor editable;
+
+  min-height: 15rem;
+}

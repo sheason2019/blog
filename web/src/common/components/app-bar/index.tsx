@@ -1,22 +1,34 @@
-import { useNavigate } from "@solidjs/router";
-import { Component } from "solid-js";
-import Avatar from "../avatar";
+import { useLocation, useNavigate } from "@solidjs/router";
+import { Component, Show } from "solid-js";
 
 const AppBar: Component = () => {
   const navigate = useNavigate();
 
-  const handleOnClickAvatar = () => {
-    // 未登录情况下跳转到Login页面
-    navigate("/login");
-    // 登录情况下跳转到Space页面
+  const location = useLocation();
+  console.log(location.pathname);
+
+  const handleToHome = () => {
+    navigate("/home");
   };
 
   return (
     <>
-      <div class="h-16 px-4 shadow-lg bg-blue-400 flex items-center fixed top-0 left-0 right-0">
-        <div class="text-white font-bold text-xl">Sheason's Blog</div>
-        <div class="flex-1" />
-        <Avatar onClick={handleOnClickAvatar} />
+      <div class="h-16 pr-6 shadow-lg z-50 bg-blue-400 flex items-center fixed top-0 left-0 right-0">
+        <div
+          class="text-white font-bold text-xl cursor-pointer px-6"
+          onClick={handleToHome}
+        >
+          Sheason's Blog
+        </div>
+        <Show when={location.pathname === "/home"}>
+          <div class="flex-1" />
+          <div
+            onClick={() => navigate("/workspace")}
+            class="text-white font-bold border border-white px-2 py-1 rounded-md border-opacity-50 hover:bg-black hover:bg-opacity-25 cursor-pointer"
+          >
+            工作台
+          </div>
+        </Show>
       </div>
       <div class="h-16" />
     </>

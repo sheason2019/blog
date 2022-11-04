@@ -1,6 +1,6 @@
 import { Component, createMemo, JSX } from "solid-js";
 
-type ButtonVariant = "primary" | "error";
+type ButtonVariant = "primary" | "error" | "outline";
 
 interface Props extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -12,6 +12,9 @@ const getClassByVariant = (variant: ButtonVariant) => {
   }
   if (variant === "error") {
     return "button-error";
+  }
+  if (variant === "outline") {
+    return "button-outline";
   }
   throw new Error("Button Variant Error!");
 };

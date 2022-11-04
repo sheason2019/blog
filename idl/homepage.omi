@@ -1,0 +1,11 @@
+import { Article } from "./blog.omi";
+
+service HomePage {
+  // 获取文章
+  repeated Article GetArticles(
+    int length,
+    int offset,
+    boolean GetNew,
+    repeated int SectionsId,
+  );
+}

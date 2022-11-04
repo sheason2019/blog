@@ -1,0 +1,11 @@
+.autocomplete-container {
+  @apply absolute top-0 left-0 bg-white shadow-lg border border-gray-300 rounded-md py-2 mt-1;
+
+  max-height: 16rem;
+  overflow-y: auto;
+  z-index: 1001;
+}
+
+.autocomplete-item {
+  @apply p-2 hover:bg-gray-200 cursor-pointer;
+}
