@@ -9,12 +9,19 @@ import {
   handleInitForm,
   ModalStatus,
   pagination,
+  setAlbumId,
   setModalStatus,
+  setShowDeleteConfirm,
 } from "../../signals";
 
 const handleEditAlbum = (album: Album) => {
   setModalStatus(ModalStatus.Update);
   handleInitForm(album);
+};
+
+const handleDeleteAlbum = (albumId: number) => {
+  setShowDeleteConfirm(true);
+  setAlbumId(albumId);
 };
 
 const columns: TableColumn[] = [
@@ -42,7 +49,11 @@ const columns: TableColumn[] = [
         >
           编辑
         </Button>
-        <Button class="py-0.5" variant="error">
+        <Button
+          class="py-0.5"
+          variant="error"
+          onClick={() => handleDeleteAlbum(row.Id)}
+        >
           删除
         </Button>
       </div>

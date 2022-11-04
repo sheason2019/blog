@@ -1,6 +1,6 @@
 /**
 * 本文件由Omi.js自动生成，谨慎改动！
-* 生成时间：2022年11月4日 17:40:51.
+* 生成时间：2022年11月4日 23:58:5.
  */
 package blog
 
@@ -87,7 +87,7 @@ type GetAlbumsRequest struct {
 	PageSize int `form:"pageSize"`
 }
 type DeleteAlbumRequest struct {
-	Album int `form:"album"`
+	AlbumId int `form:"albumId"`
 }
 type PutAlbumRequest struct {
 	Album Album `json:"album"`

@@ -1,6 +1,6 @@
 /**
 * 本文件由Omi.js自动生成，谨慎改动！
-* 生成时间：2022年11月4日 17:40:51.
+* 生成时间：2022年11月4日 23:58:5.
  */
 package blog
 
@@ -26,7 +26,7 @@ type Blog interface {
 	// 合集的CURD
 	PostAlbum(ctx *gin.Context, album Album) int
 	GetAlbums(ctx *gin.Context, page int, pageSize int) GetAlbumsResponse
-	DeleteAlbum(ctx *gin.Context, album int)
+	DeleteAlbum(ctx *gin.Context, albumId int)
 	PutAlbum(ctx *gin.Context, album Album)
 }
 type TypeBlogDefinition struct {

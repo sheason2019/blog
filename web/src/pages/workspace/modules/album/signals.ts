@@ -11,6 +11,7 @@ export enum ModalStatus {
 
 // 合集管理页面的相关Signal
 export const [modalStatus, setModalStatus] = createSignal(ModalStatus.Close);
+export const [showDeleteConfirm, setShowDeleteConfirm] = createSignal(false);
 export const [albums, setAlbums] = createSignal<Album[]>([]);
 export const [pagination, setPagination] = createSignal<Pagination>({
   Page: 1,
@@ -94,10 +95,10 @@ export const handleCreateAlbum = async () => {
     throw err;
   }
 
-  // 成功创建则关闭Modal
+  // 重新请求合集信息
+  await fetchAlbums();
+  // 关闭Modal
   setModalStatus(ModalStatus.Close);
-  // 并且重新请求合集信息
-  fetchAlbums();
 };
 
 // 编辑合集
@@ -112,6 +113,19 @@ export const handleUpdateAlbum = async () => {
   }
 
   // 同上
+  await fetchAlbums();
   setModalStatus(ModalStatus.Close);
-  fetchAlbums();
+};
+
+// 删除合集
+export const handleDeleteAlbum = async () => {
+  const client = getBlogClient();
+  const [err, res] = await client.DeleteAlbum({ albumId: albumId() });
+  if (err) {
+    handleAddErrorNotifier(err.message, "删除合集信息时发生错误");
+    throw err;
+  }
+
+  await fetchAlbums();
+  setShowDeleteConfirm(false);
 };

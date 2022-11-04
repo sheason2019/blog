@@ -27,4 +27,5 @@ func BindBlogController(r *gin.Engine) {
 	attachGetAlbums(r)
 	attachPostAlbum(r)
 	attachPutAlbum(r)
+	attachDeleteAlbum(r)
 }

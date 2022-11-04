@@ -1,6 +1,6 @@
 /**
  * 本文件由Omi.js自动生成，谨慎改动！
- * 生成时间：2022年11月4日 18:0:55.
+ * 生成时间：2022年11月4日 23:58:22.
  */
 
 import { OmiClientBase } from "@omi-stack/omi-client";
@@ -156,7 +156,7 @@ export class BlogClient extends OmiClientBase {
     return this.request<GetAlbumsResponse>(url, method, props, option);
   }
   DeleteAlbum(
-    props: { album: number },
+    props: { albumId: number },
     option?: Omit<AxiosRequestConfig, "params">
   ) {
     const url = "Blog.Album";

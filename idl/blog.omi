@@ -67,6 +67,6 @@ service Blog {
   // 合集的CURD
   int PostAlbum(Album album);
   GetAlbumsResponse GetAlbums(int page, int pageSize);
-  void DeleteAlbum(int album);
+  void DeleteAlbum(int albumId);
   void PutAlbum(Album album);
 }
