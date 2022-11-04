@@ -8,6 +8,7 @@
 
 @import "./pages/write/components/editor/index.css";
 @import "./pages/post/components/article/index.css";
+@import "./pages/workspace/modules/album/index.css";
 
 /** tailwind css */
 @tailwind base;

@@ -36,6 +36,19 @@ struct Article {
   repeated Section Sections;
 }
 
+struct Album {
+  int Id;
+  string Name;
+  string Describe;
+
+  repeated Article Articles;
+}
+
+struct GetAlbumsResponse {
+  repeated Album Albums;
+  Pagination Pagination;
+}
+
 service Blog {
   // 输入秘钥以获取用户权限
   LimitResponse GetLimit(string token);
@@ -47,7 +60,13 @@ service Blog {
   // 创建、获取和删除文章
   int PostArticle(Article article);
   Article GetArticleById(int articleId);
+  repeated Article GetArticlesByTitle(string title);
   GetArticlesResponse GetArticles(int Page, int PageSize);
   void PutArticle(Article article);
   void DeleteArticle(int articleId);
+  // 合集的CURD
+  int PostAlbum(Album album);
+  GetAlbumsResponse GetAlbums(int page, int pageSize);
+  void DeleteAlbum(int album);
+  void PutAlbum(Album album);
 }

@@ -3,6 +3,7 @@
 
   max-height: 16rem;
   overflow-y: auto;
+  z-index: 1001;
 }
 
 .autocomplete-item {

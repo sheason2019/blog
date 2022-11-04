@@ -1,6 +1,6 @@
 /**
  * 本文件由Omi.js自动生成，谨慎改动！
- * 生成时间：2022年11月2日 18:57:34.
+ * 生成时间：2022年11月4日 18:0:55.
  */
 
 import { OmiClientBase } from "@omi-stack/omi-client";
@@ -35,6 +35,16 @@ export interface Article {
   Owner: string;
   CreateTime: number;
   Sections: Section[];
+}
+export interface Album {
+  Id: number;
+  Name: string;
+  Describe: string;
+  Articles: Article[];
+}
+export interface GetAlbumsResponse {
+  Albums: Album[];
+  Pagination: Pagination;
 }
 export class BlogClient extends OmiClientBase {
   // 输入秘钥以获取用户权限
@@ -96,6 +106,14 @@ export class BlogClient extends OmiClientBase {
     const method = "Get";
     return this.request<Article>(url, method, props, option);
   }
+  GetArticlesByTitle(
+    props: { title: string },
+    option?: Omit<AxiosRequestConfig, "params">
+  ) {
+    const url = "Blog.ArticlesByTitle";
+    const method = "Get";
+    return this.request<Article[]>(url, method, props, option);
+  }
   GetArticles(
     props: { Page: number; PageSize: number },
     option?: Omit<AxiosRequestConfig, "params">
@@ -118,6 +136,39 @@ export class BlogClient extends OmiClientBase {
   ) {
     const url = "Blog.Article";
     const method = "Delete";
+    return this.request<void>(url, method, props, option);
+  }
+  // 合集的CURD
+  PostAlbum(
+    props: { album: Album },
+    option?: Omit<AxiosRequestConfig, "params">
+  ) {
+    const url = "Blog.Album";
+    const method = "Post";
+    return this.request<number>(url, method, props, option);
+  }
+  GetAlbums(
+    props: { page: number; pageSize: number },
+    option?: Omit<AxiosRequestConfig, "params">
+  ) {
+    const url = "Blog.Albums";
+    const method = "Get";
+    return this.request<GetAlbumsResponse>(url, method, props, option);
+  }
+  DeleteAlbum(
+    props: { album: number },
+    option?: Omit<AxiosRequestConfig, "params">
+  ) {
+    const url = "Blog.Album";
+    const method = "Delete";
+    return this.request<void>(url, method, props, option);
+  }
+  PutAlbum(
+    props: { album: Album },
+    option?: Omit<AxiosRequestConfig, "params">
+  ) {
+    const url = "Blog.Album";
+    const method = "Put";
     return this.request<void>(url, method, props, option);
   }
 }

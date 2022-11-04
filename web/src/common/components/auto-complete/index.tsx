@@ -18,6 +18,7 @@ interface Props {
   options: Option[];
   onSelect?: (value: any) => any;
   onInputChange?: (value: string) => any;
+  placeholder?: string;
 }
 
 const AutoComplete: Component<Props> = (props) => {
@@ -27,7 +28,6 @@ const AutoComplete: Component<Props> = (props) => {
   const [inputContent, setInputContent] = createSignal("");
 
   const show = createMemo(() => {
-    console.log(inputRef?.value);
     if (focus() && inputContent().length > 0) {
       return true;
     }
@@ -76,6 +76,7 @@ const AutoComplete: Component<Props> = (props) => {
     <div class="relative">
       <Input
         onInput={handleInputChange}
+        placeholder={props.placeholder}
         ref={inputRef}
         value={inputContent()}
         onFocus={() => setFocus(true)}
@@ -88,7 +89,7 @@ const AutoComplete: Component<Props> = (props) => {
                 {(item) => (
                   <div
                     onClick={() => handleOnClick(item.value)}
-                    class="autocomplete-item"
+                    class="autocomplete-item whitespace-nowrap"
                   >
                     {item.label}
                   </div>

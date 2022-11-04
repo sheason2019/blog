@@ -1,6 +1,6 @@
 /**
 * 本文件由Omi.js自动生成，谨慎改动！
-* 生成时间：2022年11月2日 15:19:36.
+* 生成时间：2022年11月4日 17:40:51.
  */
 package blog
 
@@ -34,6 +34,16 @@ type Article struct {
 	CreateTime *int
 	Sections   *[]Section
 }
+type Album struct {
+	Id       *int
+	Name     *string
+	Describe *string
+	Articles *[]Article
+}
+type GetAlbumsResponse struct {
+	Albums     *[]Album
+	Pagination *Pagination
+}
 type GetLimitRequest struct {
 	Token string `form:"token"`
 }
@@ -56,6 +66,9 @@ type PostArticleRequest struct {
 type GetArticleByIdRequest struct {
 	ArticleId int `form:"articleId"`
 }
+type GetArticlesByTitleRequest struct {
+	Title string `form:"title"`
+}
 type GetArticlesRequest struct {
 	Page     int `form:"Page"`
 	PageSize int `form:"PageSize"`
@@ -65,4 +78,17 @@ type PutArticleRequest struct {
 }
 type DeleteArticleRequest struct {
 	ArticleId int `form:"articleId"`
+}
+type PostAlbumRequest struct {
+	Album Album `json:"album"`
+}
+type GetAlbumsRequest struct {
+	Page     int `form:"page"`
+	PageSize int `form:"pageSize"`
+}
+type DeleteAlbumRequest struct {
+	Album int `form:"album"`
+}
+type PutAlbumRequest struct {
+	Album Album `json:"album"`
 }
