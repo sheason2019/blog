@@ -1,6 +1,6 @@
 import { LexicalEditor } from "lexical";
 import { Component, createEffect } from "solid-js";
-import { article } from "../..";
+import { article } from "../../signals";
 import RichTextEditor from "../../../../common/components/editor";
 
 const Article: Component = () => {

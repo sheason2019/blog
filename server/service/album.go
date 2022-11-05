@@ -1,8 +1,6 @@
 package service
 
 import (
-	"fmt"
-
 	"github.com/sheason2019/blog/dao"
 	"github.com/sheason2019/blog/db"
 	"github.com/sheason2019/blog/omi/blog"
@@ -50,7 +48,6 @@ func UpdateAlbum(album blog.Album) *dao.Album {
 	daoAlbum := dao.Album{}
 
 	conn.Transaction(func(tx *gorm.DB) error {
-		fmt.Println("albumId ", album.Id)
 		daoAlbum.ID = uint(*album.Id)
 		daoAlbum.Name = *album.Name
 		daoAlbum.Describe = *album.Describe
@@ -69,7 +66,7 @@ func UpdateAlbum(album blog.Album) *dao.Album {
 
 		len := len(albumItems)
 		for i, v := range *album.Articles {
-			if i <= len {
+			if i < len {
 				albumItems[i].ArticleId = uint(*v.Id)
 			} else {
 				albumItems = append(albumItems, dao.AlbumItem{

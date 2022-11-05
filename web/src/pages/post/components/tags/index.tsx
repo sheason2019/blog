@@ -1,5 +1,5 @@
 import { Component, For, Show } from "solid-js";
-import { article } from "../..";
+import { article } from "../../signals";
 import Header from "../../../../common/components/header";
 import Tag from "../../../../common/components/tag";
 
