@@ -32,7 +32,7 @@ func (homepageImpl) GetStatisticInfo(ctx *gin.Context) homepage.StatisticInfo {
 	}
 
 	var albumCount int64
-	err = conn.Model(&dao.Section{}).Count(&albumCount).Error
+	err = conn.Model(&dao.Album{}).Count(&albumCount).Error
 	if err != nil {
 		panic(err)
 	}
