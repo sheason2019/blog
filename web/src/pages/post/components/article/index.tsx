@@ -22,7 +22,7 @@ const Article: Component = () => {
     editor.setEditorState(editor.parseEditorState(_article?.Content));
   });
 
-  return <div class="article" ref={articleRef} />;
+  return <div class="article flex-1" ref={articleRef} />;
 };
 
 export default Article;

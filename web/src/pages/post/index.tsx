@@ -2,7 +2,7 @@ import { useLocation, useParams } from "@solidjs/router";
 import { createEffect } from "solid-js";
 import AppBar from "../../common/components/app-bar";
 import Main from "./components/main";
-import { handleFetchAlbum, handleFetchArticle } from "./signals";
+import { handleFetchAlbum, handleFetchArticle, setAlbum } from "./signals";
 
 const PostPage = () => {
   const params = useParams();
@@ -20,6 +20,10 @@ const PostPage = () => {
   // albumId发生变化时重新请求合集信息
   createEffect((prev: number) => {
     const albumId = Number(location.query["albumId"]);
+    setAlbum(undefined);
+
+    if (Number.isNaN(albumId)) return -1;
+
     if (prev !== albumId) {
       handleFetchAlbum(albumId);
     }
@@ -28,10 +32,10 @@ const PostPage = () => {
   }, -1);
 
   return (
-    <>
+    <div class="min-h-screen flex flex-col">
       <AppBar />
       <Main />
-    </>
+    </div>
   );
 };
 

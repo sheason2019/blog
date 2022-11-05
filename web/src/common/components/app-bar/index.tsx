@@ -5,7 +5,6 @@ const AppBar: Component = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  console.log(location.pathname);
 
   const handleToHome = () => {
     navigate("/home");
@@ -13,9 +12,9 @@ const AppBar: Component = () => {
 
   return (
     <>
-      <div class="h-16 pr-6 shadow-lg z-50 bg-blue-400 flex items-center fixed top-0 left-0 right-0">
+      <div class="h-16 md:pr-6 pr-2 shadow-lg z-50 bg-blue-400 flex items-center fixed top-0 left-0 right-0">
         <div
-          class="text-white font-bold text-xl cursor-pointer px-6"
+          class="text-white font-bold text-xl cursor-pointer md:px-6 px-2"
           onClick={handleToHome}
         >
           Sheason's Blog

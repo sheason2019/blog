@@ -13,7 +13,7 @@ const Albums: Component = () => {
   });
 
   return (
-    <div class="mt-2">
+    <div class="mt-2 px-2 md:px-0">
       <div class="flex justify-between">
         <Header>常用合集</Header>
         <Link onClick={() => navigate("/albums")}>查看全部</Link>

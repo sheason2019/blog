@@ -10,7 +10,7 @@ const Container: Component<ParentProps> = (props) => {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      class="bg-white shadow-md rounded-md"
+      class="bg-white shadow-md rounded-md mx-4 md:mx-0"
       style={{ width: ModalSize.sm }}
     >
       {props.children}

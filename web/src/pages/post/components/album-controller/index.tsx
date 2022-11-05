@@ -44,30 +44,36 @@ const AlbumController = () => {
   };
 
   return (
-    <div class="grid grid-cols-3 gap-4">
-      <Switch fallback={<div />}>
-        <Match when={currentIndex() > 1}>
-          <Item onClick={() => handleToArticle(lastArticle())}>
-            <div>上一篇</div>
-            <div class="mt-2">{lastArticle()?.Title}</div>
-          </Item>
-        </Match>
-      </Switch>
-      <Item onClick={handleToAlbum}>
-        <div>合集 - {album()?.Name}</div>
-        <div class="mt-2">
-          当前第{currentIndex()}/{albumLength()}篇
-        </div>
-      </Item>
-      <Switch fallback={<div />}>
-        <Match when={currentIndex() < albumLength()}>
-          <Item onClick={() => handleToArticle(nextArticle())}>
-            <div>下一篇</div>
-            <div class="mt-2">{nextArticle()?.Title}</div>
-          </Item>
-        </Match>
-      </Switch>
-    </div>
+    <Show when={album()}>
+      <div class="grid grid-cols-3 md:gap-4 gap-2 py-2">
+        <Switch fallback={<div />}>
+          <Match when={currentIndex() > 1}>
+            <Item onClick={() => handleToArticle(lastArticle())}>
+              <div>上一篇</div>
+              <div class="md:mt-2 max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+                {lastArticle()?.Title}
+              </div>
+            </Item>
+          </Match>
+        </Switch>
+        <Item onClick={handleToAlbum}>
+          <div>合集 - {album()?.Name}</div>
+          <div class="md:mt-2">
+            当前第{currentIndex()}/{albumLength()}篇
+          </div>
+        </Item>
+        <Switch fallback={<div />}>
+          <Match when={currentIndex() < albumLength()}>
+            <Item onClick={() => handleToArticle(nextArticle())}>
+              <div>下一篇</div>
+              <div class="md:mt-2 max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+                {nextArticle()?.Title}
+              </div>
+            </Item>
+          </Match>
+        </Switch>
+      </div>
+    </Show>
   );
 };
 

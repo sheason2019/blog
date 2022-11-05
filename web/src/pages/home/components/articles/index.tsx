@@ -13,7 +13,7 @@ const Articles: Component = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div class="px-2 md:px-0">
       <div class="flex justify-between">
         <Header>最近更新</Header>
         <Link onClick={() => navigate("/posts")}>查看全部</Link>

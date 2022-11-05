@@ -1,8 +1,8 @@
-import { Component, createMemo, JSX, ParentProps } from "solid-js";
+import { Component, createMemo, JSX } from "solid-js";
 
 const Container: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {
   const className = createMemo(
-    () => `container mx-auto flex flex-col ${props.class}`
+    () => `container mx-auto flex flex-col px-2 md:px-0 ${props.class}`
   );
 
   const style = createMemo(() => {
