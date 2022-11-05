@@ -1,8 +1,8 @@
-import { Component } from "solid-js";
+import { Component, JSX } from "solid-js";
 
 interface Props {
-  title: string;
-  value: string;
+  title: JSX.Element;
+  value: JSX.Element;
 }
 
 const StatisticsItem: Component<Props> = (props) => {

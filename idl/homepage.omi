@@ -1,5 +1,12 @@
 import { Article, Album } from "./blog.omi";
 
+struct StatisticInfo {
+  int ArticlesCount;
+  int SectionsCount;
+  int AlbumsCount;
+  int WeekUpdateCount;
+}
+
 service HomePage {
   // 获取文章
   repeated Article GetArticles(
@@ -15,4 +22,6 @@ service HomePage {
     boolean GetNew,
   );
   Album GetAlbum(int id);
+  // 获取统计信息
+  StatisticInfo GetStatisticInfo();
 }
