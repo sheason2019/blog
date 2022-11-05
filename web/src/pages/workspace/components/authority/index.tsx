@@ -3,6 +3,7 @@ import Header from "../../../../common/components/header";
 import Input from "../../../../common/components/input";
 import { fetchLimit } from "../../../../common/signals/limit";
 import { setToken } from "../../../../common/utils/token";
+import { handleAddErrorNotifier } from "../../../../common/utils/use-notifier";
 
 const Authority = () => {
   let input: HTMLInputElement | undefined;
@@ -10,6 +11,11 @@ const Authority = () => {
     e.preventDefault();
 
     const value = input!.value;
+    if (value.length === 0) {
+      handleAddErrorNotifier("秘钥内容不可以为空", "请输入秘钥");
+      return;
+    }
+
     setToken(value);
 
     fetchLimit();
@@ -19,7 +25,7 @@ const Authority = () => {
     <div class="flex flex-1 justify-center items-center">
       <form
         onSubmit={handleFetchLimit}
-        class="flex flex-col justify-center items-center border border-gray-300 px-24 py-8 rounded-lg shadow-md"
+        class="flex flex-col justify-center items-center border border-gray-300 md:px-24 px-0 md:w-auto w-full mx-2 py-8 rounded-lg shadow-md"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

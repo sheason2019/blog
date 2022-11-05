@@ -7,7 +7,7 @@ const Tags: Component = () => {
   return (
     <Show when={article()?.Sections && article()!.Sections.length > 0}>
       <Header>关联标签</Header>
-      <div class="mt-2">
+      <div class="mt-2 pb-2">
         <For each={article()?.Sections}>
           {(section) => <Tag>{section.SectionName}</Tag>}
         </For>
