@@ -12,7 +12,7 @@ const ArticleItem: Component<Props> = (props) => {
   return (
     <div
       onClick={props.onClick}
-      class="p-2 border border-gray-300 bg-gray-50 rounded-md hover:bg-gray-200 cursor-pointer"
+      class="duration-300 hover:shadow-md p-2 border border-gray-300 bg-gray-50 rounded-md hover:bg-gray-200 cursor-pointer"
     >
       <div class="font-bold">{props.article.Title}</div>
       <div class="text-gray-500 text-sm mt-0.5">

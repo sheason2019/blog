@@ -11,7 +11,7 @@ const AlbumsItem: Component<Props> = (props) => {
   return (
     <div
       onClick={props.onClick}
-      class="duration-300 border bg-gray-50 border-gray-400 rounded-md p-2 cursor-pointer hover:bg-gray-100 hover:shadow-md"
+      class="duration-300 border bg-gray-50 border-gray-300 rounded-md p-2 cursor-pointer hover:bg-gray-200 hover:shadow-md"
     >
       <div class="flex justify-between">
         <div class="font-bold text-lg">{props.album.Name}</div>
