@@ -1,6 +1,7 @@
 package db
 
 import (
+	"github.com/sheason2019/blog/secret"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -16,7 +17,7 @@ func GetConn() *gorm.DB {
 }
 
 func InitConn() {
-	dsn := "host=localhost user=postgres password=123456 dbname=postgres sslmode=disable TimeZone=Asia/Shanghai"
+	dsn := "host=postgres user=" + secret.DB_USERNAME + " password=" + secret.DB_PASSWORD + " dbname=postgres sslmode=disable TimeZone=Asia/Shanghai"
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	// 数据库连接出错直接panic
@@ -34,7 +35,7 @@ func InitConn() {
 		db.Exec("CREATE DATABASE blog")
 	}
 
-	dsn = "host=localhost user=postgres password=123456 dbname=blog sslmode=disable TimeZone=Asia/Shanghai"
+	dsn = "host=postgres user=" + secret.DB_USERNAME + " password=" + secret.DB_PASSWORD + " dbname=blog sslmode=disable TimeZone=Asia/Shanghai"
 
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
