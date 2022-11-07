@@ -122,7 +122,7 @@ const ModalContent: Component = () => {
         <div class="flex">
           <For each={sections()}>
             {(item) => (
-              <div class="mt-2">
+              <div class="mt-2 mr-2">
                 <SectionTag section={item} onClose={handleRemoveSection} />
               </div>
             )}

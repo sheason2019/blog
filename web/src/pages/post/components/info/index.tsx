@@ -1,5 +1,5 @@
 import { Component, Show } from "solid-js";
-import { article } from "../..";
+import { article } from "../../signals";
 
 const HOUR = 60 * 60;
 

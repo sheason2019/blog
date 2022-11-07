@@ -5,6 +5,7 @@ import Container from "../../../../common/components/container";
 import Article from "../article";
 import Info from "../info";
 import Tags from "../tags";
+import AlbumController from "../album-controller";
 
 const Main: Component = () => {
   return (
@@ -14,6 +15,7 @@ const Main: Component = () => {
         <Info />
         <Article />
         <Tags />
+        <AlbumController />
       </Container>
     </div>
   );

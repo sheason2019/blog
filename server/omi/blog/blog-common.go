@@ -1,6 +1,6 @@
 /**
 * 本文件由Omi.js自动生成，谨慎改动！
-* 生成时间：2022年11月4日 23:58:5.
+* 生成时间：2022年11月5日 21:38:7.
  */
 package blog
 
@@ -35,10 +35,11 @@ type Article struct {
 	Sections   *[]Section
 }
 type Album struct {
-	Id       *int
-	Name     *string
-	Describe *string
-	Articles *[]Article
+	Id         *int
+	Name       *string
+	Describe   *string
+	Articles   *[]Article
+	UpdateTime *int
 }
 type GetAlbumsResponse struct {
 	Albums     *[]Album

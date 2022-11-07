@@ -23,6 +23,8 @@ func (model Album) ToIDL() blog.Album {
 	album.Id = &id
 	album.Name = &model.Name
 	album.Describe = &model.Describe
+	updateTime := int(model.UpdatedAt.Unix())
+	album.UpdateTime = &updateTime
 
 	articles := make([]blog.Article, len(model.Items))
 	sort.Slice(model.Items, func(i, j int) bool {

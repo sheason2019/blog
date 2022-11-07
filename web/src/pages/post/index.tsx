@@ -1,34 +1,41 @@
-import { useParams } from "@solidjs/router";
-import { createSignal } from "solid-js";
-import { getBlogClient } from "../../api-client";
-import { Article } from "../../api-lib/blog-client";
+import { useLocation, useParams } from "@solidjs/router";
+import { createEffect } from "solid-js";
 import AppBar from "../../common/components/app-bar";
-import { handleAddErrorNotifier } from "../../common/utils/use-notifier";
 import Main from "./components/main";
-
-export const [article, setArticle] = createSignal<Article>();
-
-const handleFetchArticle = async (articleId: number) => {
-  const client = getBlogClient();
-  const [err, res] = await client.GetArticleById({ articleId });
-
-  if (err) {
-    handleAddErrorNotifier(err.message, "获取文章时出现错误");
-    throw err;
-  }
-
-  setArticle(res);
-};
+import { handleFetchAlbum, handleFetchArticle, setAlbum } from "./signals";
 
 const PostPage = () => {
-  const { id } = useParams();
-  handleFetchArticle(Number(id));
+  const params = useParams();
+  const location = useLocation();
+
+  // id发生变化时重新请求文章内容
+  createEffect((prev: number) => {
+    const id = Number(params.id);
+    if (id !== prev) {
+      handleFetchArticle(id);
+    }
+    return id;
+  }, -1);
+
+  // albumId发生变化时重新请求合集信息
+  createEffect((prev: number) => {
+    const albumId = Number(location.query["albumId"]);
+    setAlbum(undefined);
+
+    if (Number.isNaN(albumId)) return -1;
+
+    if (prev !== albumId) {
+      handleFetchAlbum(albumId);
+    }
+
+    return albumId;
+  }, -1);
 
   return (
-    <>
+    <div class="min-h-screen flex flex-col">
       <AppBar />
       <Main />
-    </>
+    </div>
   );
 };
 

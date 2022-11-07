@@ -11,4 +11,7 @@ var controller homepage.HomePage = homepageImpl{}
 
 func BindHomepageController(r *gin.Engine) {
 	attachGetArticles(r)
+	attachGetAlbums(r)
+	attachGetAlbum(r)
+	attachGetStatisticInfo(r)
 }

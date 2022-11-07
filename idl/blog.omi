@@ -42,6 +42,8 @@ struct Album {
   string Describe;
 
   repeated Article Articles;
+
+  optional int UpdateTime;
 }
 
 struct GetAlbumsResponse {

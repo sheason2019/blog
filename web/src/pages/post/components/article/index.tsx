@@ -1,6 +1,6 @@
 import { LexicalEditor } from "lexical";
 import { Component, createEffect } from "solid-js";
-import { article } from "../..";
+import { article } from "../../signals";
 import RichTextEditor from "../../../../common/components/editor";
 
 const Article: Component = () => {
@@ -22,7 +22,7 @@ const Article: Component = () => {
     editor.setEditorState(editor.parseEditorState(_article?.Content));
   });
 
-  return <div class="article" ref={articleRef} />;
+  return <div class="article flex-1" ref={articleRef} />;
 };
 
 export default Article;

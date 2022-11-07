@@ -28,3 +28,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.min-h-screen {
+  min-height: 100vh;
+}
+.max-w-full {
+  max-width: 100%;
+}

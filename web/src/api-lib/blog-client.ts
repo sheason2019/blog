@@ -1,6 +1,6 @@
 /**
  * 本文件由Omi.js自动生成，谨慎改动！
- * 生成时间：2022年11月4日 23:58:22.
+ * 生成时间：2022年11月5日 21:51:5.
  */
 
 import { OmiClientBase } from "@omi-stack/omi-client";
@@ -41,6 +41,7 @@ export interface Album {
   Name: string;
   Describe: string;
   Articles: Article[];
+  UpdateTime?: number;
 }
 export interface GetAlbumsResponse {
   Albums: Album[];
