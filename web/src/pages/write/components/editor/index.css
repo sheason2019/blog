@@ -39,6 +39,6 @@
 }
 
 /** 行距 */
-.editor-paragraph {
-  margin-bottom: 0.25rem;
+.editor > * {
+  margin-bottom: 0.8rem;
 }

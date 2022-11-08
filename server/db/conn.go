@@ -17,7 +17,7 @@ func GetConn() *gorm.DB {
 }
 
 func InitConn() {
-	dsn := "host=postgres user=" + secret.DB_USERNAME + " password=" + secret.DB_PASSWORD + " dbname=postgres sslmode=disable TimeZone=Asia/Shanghai"
+	dsn := "host=" + secret.Host + " user=" + secret.DB_USERNAME + " password=" + secret.DB_PASSWORD + " dbname=postgres sslmode=disable TimeZone=Asia/Shanghai"
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	// 数据库连接出错直接panic
@@ -35,7 +35,7 @@ func InitConn() {
 		db.Exec("CREATE DATABASE blog")
 	}
 
-	dsn = "host=postgres user=" + secret.DB_USERNAME + " password=" + secret.DB_PASSWORD + " dbname=blog sslmode=disable TimeZone=Asia/Shanghai"
+	dsn = "host=" + secret.Host + " user=" + secret.DB_USERNAME + " password=" + secret.DB_PASSWORD + " dbname=blog sslmode=disable TimeZone=Asia/Shanghai"
 
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
