@@ -1,4 +1,4 @@
-import { Component, For } from "solid-js";
+import { Component, createEffect, For } from "solid-js";
 import AutoComplete from "../../../../common/components/auto-complete";
 import Button from "../../../../common/components/button";
 import Modal from "../../../../common/components/modal";
@@ -24,6 +24,8 @@ import { content } from "../editor";
 import { title } from "../title";
 
 const SubmitModal: Component = () => {
+  createEffect(() => setOpen(false));
+
   return (
     <Modal
       header="创建文章"

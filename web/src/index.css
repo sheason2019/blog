@@ -35,3 +35,10 @@ code {
 .max-w-full {
   max-width: 100%;
 }
+
+*,
+::before,
+::after {
+  border-width: 0;
+  border-style: solid;
+}
