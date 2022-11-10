@@ -5,9 +5,11 @@ import { handleAddErrorNotifier } from "../../common/utils/use-notifier";
 
 export const [article, setArticle] = createSignal<Article>();
 export const [album, setAlbum] = createSignal<Album>();
+export const [loading, setLoading] = createSignal(false);
 
 export const handleFetchArticle = async (articleId: number) => {
   setArticle(undefined);
+  setLoading(true);
 
   const client = getBlogClient();
   const [err, res] = await client.GetArticleById({ articleId });
@@ -18,6 +20,7 @@ export const handleFetchArticle = async (articleId: number) => {
   }
 
   setArticle(res);
+  setLoading(false);
 };
 
 export const handleFetchAlbum = async (albumId: number) => {
