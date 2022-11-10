@@ -1,7 +1,7 @@
 import { Component, createMemo } from "solid-js";
 
 interface Props {
-  size: number;
+  size?: number;
 }
 
 const Spin: Component<Props> = (props) => {
