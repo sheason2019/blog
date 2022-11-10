@@ -12,7 +12,7 @@ func (blogImpl) PutArticle(ctx *gin.Context, article blog.Article) {
 	conn := db.GetConn()
 
 	daoArticle := service.CreateArticleByIDL(article)
-	conn.Save(&daoArticle)
+	conn.Omit("created_at").Save(&daoArticle)
 }
 
 func attachPutArticle(r *gin.Engine) {
