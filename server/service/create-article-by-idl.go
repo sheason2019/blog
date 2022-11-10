@@ -7,6 +7,7 @@ import (
 
 func CreateArticleByIDL(article blog.Article) dao.Article {
 	daoArticle := dao.Article{}
+	daoArticle.ID = uint(*article.Id)
 	daoArticle.Content = *article.Content
 	daoArticle.Title = *article.Title
 	daoArticle.Owner = "Sheason"

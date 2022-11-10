@@ -20,7 +20,7 @@ func attachPutArticle(r *gin.Engine) {
 		props := blog.PutArticleRequest{}
 		ctx.BindJSON(&props)
 
-		controller.PostArticle(ctx, props.Article)
+		controller.PutArticle(ctx, props.Article)
 		ctx.String(200, "OK")
 	})
 }

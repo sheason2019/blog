@@ -6,6 +6,7 @@ import { HeadingNode, QuoteNode, registerRichText } from "@lexical/rich-text";
 import { TableNode, TableCellNode, TableRowNode } from "@lexical/table";
 import { createEditor, LexicalEditor } from "lexical";
 import exampleTheme from "../../../pages/write/components/editor/themes/example";
+import { useList } from "./components/use-list";
 
 class RichTextEditor {
   constructor(root: HTMLElement) {
@@ -32,6 +33,7 @@ class RichTextEditor {
 
     registerRichText(editor);
 
+    useList(editor);
     registerMarkdownShortcuts(editor, TRANSFORMERS);
 
     this.editor = editor;

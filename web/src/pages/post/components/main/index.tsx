@@ -9,7 +9,7 @@ import AlbumController from "../album-controller";
 
 const Main: Component = () => {
   return (
-    <div class="flex-1 flex flex-col overflow-y-scroll">
+    <div class="flex-1 self-stretch overflow-y-scroll">
       <Container class="flex-1 flex flex-col">
         <Title />
         <Info />

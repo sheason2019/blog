@@ -1,20 +1,16 @@
 import { Component, createMemo, JSX } from "solid-js";
 
 const Container: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const className = createMemo(
-    () => `container mx-auto flex flex-col px-2 md:px-0 ${props.class}`
+  const className = createMemo(() => `md:px-0 px-2 ${props.class}`);
+
+  return (
+    <div
+      class="container mx-auto flex flex-col"
+      style={{ "max-width": "1024px" }}
+    >
+      <div {...props} class={className()} />
+    </div>
   );
-
-  const style = createMemo(() => {
-    const propsStyle = typeof props.style === "object" ? props.style : {};
-
-    return {
-      ...propsStyle,
-      "max-width": "1024px",
-    };
-  });
-
-  return <div {...props} class={className()} style={style()} />;
 };
 
 export default Container;

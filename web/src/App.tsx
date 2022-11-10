@@ -27,6 +27,7 @@ const App: Component = () => {
         />
         <Route path="/workspace/:module" component={WorkSpacePage} />
         <Route path="/write" component={WritePage} />
+        <Route path="/write/:id" component={WritePage} />
         <Route path="/posts" component={PostsPage} />
         <Route path="/post/:id" component={PostPage} />
         <Route path="/albums" component={AlbumsPage} />
