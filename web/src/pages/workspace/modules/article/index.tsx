@@ -2,7 +2,7 @@ import { Component, createEffect } from "solid-js";
 import { Pagination } from "../../../../api-lib/blog-client";
 import Header from "../../../../common/components/header";
 import PaginationComp from "../../components/pagination";
-import Table from "../../components/table";
+import ArticleTable from "./components/article-table";
 import ConfirmDeleteModal from "./components/confirm-delete-modal";
 import PostsController from "./components/posts-controller";
 import { articles, columns, handleFetchArticles, pagination } from "./signals";
@@ -28,7 +28,7 @@ const Article: Component = () => {
     <>
       <Header>文章管理</Header>
       <PostsController />
-      <Table data={articles()} columns={columns} />
+      <ArticleTable />
       <div class="mt-2">
         <PaginationComp pagination={pagination()} />
       </div>

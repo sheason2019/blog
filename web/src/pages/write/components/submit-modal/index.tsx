@@ -1,4 +1,4 @@
-import { Component, createEffect, For } from "solid-js";
+import { Component, createEffect, createMemo, For } from "solid-js";
 import AutoComplete from "../../../../common/components/auto-complete";
 import Button from "../../../../common/components/button";
 import Modal from "../../../../common/components/modal";
@@ -14,21 +14,35 @@ import {
   handleRemoveSection,
   open,
   options,
-  selectedSections,
   setOpen,
   setOptions,
 } from "./signals";
 import Tag from "../../../../common/components/tag";
 import { useNavigate } from "@solidjs/router";
-import { content } from "../editor";
-import { title } from "../title";
+import {
+  content,
+  id,
+  selectedSections,
+  SubmitType,
+  submitType,
+  title,
+} from "../../signals";
 
 const SubmitModal: Component = () => {
   createEffect(() => setOpen(false));
 
+  const header = createMemo(() => {
+    if (submitType() === SubmitType.Post) {
+      return "创建文章";
+    }
+    if (submitType() === SubmitType.Put) {
+      return "更新文章";
+    }
+    return "未知";
+  });
   return (
     <Modal
-      header="创建文章"
+      header={header()}
       content={<ModalContent />}
       actions={<ModalActions />}
       onClose={() => setOpen(false)}
@@ -95,7 +109,7 @@ const ModalContent: Component = () => {
 const ModalActions: Component = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
+  const handlePost = async () => {
     const client = getBlogClient();
     if (title().length === 0) {
       handleAddErrorNotifier("请输入文章标题", "验证错误");
@@ -122,6 +136,45 @@ const ModalActions: Component = () => {
     setTimeout(() => {
       navigate("/post/" + res);
     }, 1500);
+  };
+
+  const handlePut = async () => {
+    const client = getBlogClient();
+    if (title().length === 0) {
+      handleAddErrorNotifier("请输入文章标题", "验证错误");
+      return;
+    }
+
+    const [err, res] = await client.PutArticle({
+      article: {
+        Id: id(),
+        Title: title(),
+        Content: content(),
+        Owner: "",
+        CreateTime: 0,
+        Sections: selectedSections(),
+      },
+    });
+
+    if (err) {
+      handleAddErrorNotifier(err.message, "创建文章时发生错误");
+      throw err;
+    }
+
+    handleAddSuccessNotifier("正在跳转至阅读页面", "更新文章成功");
+    setTimeout(() => {
+      navigate("/post/" + id());
+    }, 1500);
+  };
+
+  const handleSubmit = () => {
+    if (submitType() === SubmitType.Post) {
+      return handlePost();
+    }
+    if (submitType() === SubmitType.Put) {
+      return handlePut();
+    }
+    handleAddErrorNotifier("未知的提交类型", "提交文章时发生错误");
   };
 
   return (

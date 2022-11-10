@@ -42,3 +42,12 @@
 .editor > * {
   margin-bottom: 0.8rem;
 }
+
+/** 嵌套List */
+.editor-nested-listitem {
+  list-style-type: none;
+}
+
+.editor-listitem {
+  margin-bottom: 0.35rem;
+}

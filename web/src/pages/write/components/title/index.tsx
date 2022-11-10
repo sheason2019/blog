@@ -1,4 +1,5 @@
-import { Component, createSignal, JSX } from "solid-js";
+import { Component, createEffect, JSX } from "solid-js";
+import { setTitle, title } from "../../signals";
 import { handleFocusContent } from "../editor";
 
 let titleRef: HTMLDivElement;
@@ -11,7 +12,9 @@ export const handleFocusTitle = () => {
   range?.collapseToEnd();
 };
 
-export const [title, setTitle] = createSignal("");
+export const handleSyncTitle = () => {
+  titleRef.innerText = title();
+};
 
 const Title: Component = () => {
   const contentEditable: any = "plaintext-only";

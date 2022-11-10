@@ -4,6 +4,10 @@ import { TRANSFORMERS, $convertToMarkdownString } from "@lexical/markdown";
 
 import { handleFocusTitle } from "../title";
 import RichTextEditor from "../../../../common/components/editor";
+import { content, setContent } from "../../signals";
+import { LexicalEditor } from "lexical";
+
+let editor: LexicalEditor;
 
 let editorRef: HTMLDivElement;
 
@@ -15,7 +19,9 @@ export const handleFocusContent = () => {
   range?.collapseToStart();
 };
 
-export const [content, setContent] = createSignal("");
+export const handleSyncContent = () => {
+  editor.setEditorState(editor.parseEditorState(content()));
+};
 
 const Editor: Component = () => {
   const [empty, setEmpty] = createSignal(true);
@@ -24,7 +30,7 @@ const Editor: Component = () => {
     if (!editorRef) return;
 
     const richEditor = new RichTextEditor(editorRef);
-    const editor = richEditor.editor;
+    editor = richEditor.editor;
 
     editor.registerUpdateListener(({ editorState }) => {
       setContent(JSON.stringify(editorState.toJSON()));

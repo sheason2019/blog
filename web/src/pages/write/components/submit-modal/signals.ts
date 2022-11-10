@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
 import { Section } from "../../../../api-lib/blog-client";
 import { Option } from "../../../../common/components/auto-complete";
-import { handleAddErrorNotifier } from "../../../../common/utils/use-notifier";
+import { setSelectedSections } from "../../signals";
 
 // set防止写入重复的标签
 const sectionSet = new Set<number>();
@@ -10,10 +10,6 @@ const sectionSet = new Set<number>();
 export const [open, setOpen] = createSignal(false);
 
 export const [options, setOptions] = createSignal<Option[]>([]);
-
-export const [selectedSections, setSelectedSections] = createSignal<Section[]>(
-  []
-);
 
 export const handleAddSection = (section: Section) => {
   if (sectionSet.has(section.SectionId)) {
