@@ -54,3 +54,10 @@ object {
   display: block;
   vertical-align: middle;
 }
+
+.footer {
+  min-height: 8rem;
+}
+.footer-item {
+  min-height: 6rem;
+}

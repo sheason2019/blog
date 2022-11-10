@@ -17,7 +17,7 @@ const App: Component = () => {
   fetchLimit();
 
   return (
-    <div class="h-screen w-screen overflow-hidden flex flex-col relative">
+    <div class="h-screen w-screen overflow-y-auto flex flex-col relative">
       <Routes>
         <Route path="/" component={WelcomePage} />
         <Route path="/home" component={HomePage} />
