@@ -19,7 +19,7 @@ func (model Article) ToIDL() blog.Article {
 	article := blog.Article{}
 
 	id := int(model.ID)
-	createTime := int(model.CreatedAt.Unix())
+	updatedTime := int(model.UpdatedAt.Unix())
 
 	sections := make([]blog.Section, len(model.Sections))
 	for i, v := range model.Sections {
@@ -31,7 +31,8 @@ func (model Article) ToIDL() blog.Article {
 	article.Title = &model.Title
 	article.Owner = &model.Owner
 	article.Sections = &sections
-	article.CreateTime = &createTime
+	// 显示创建时间没啥用，这里展示更新时间好了
+	article.CreateTime = &updatedTime
 
 	return article
 }
